@@ -1,0 +1,147 @@
+## YAML Template.
+---
+app:
+    name: '@pom.artifactId@'
+    version: '@pom.artifactId@'
+spring:
+    main:
+        allow-bean-definition-overriding: true
+        banner-mode: console
+    profiles:
+        active: local
+    application:
+        name: '@pom.artifactId@'
+    output:
+        ansi:
+            enabled: DETECT
+    jmx:
+        default-domain: prx-backoffice-rest
+    data:
+        rest:
+            base-path: /api
+#<><><><><><><><><><><><><><> BASE DE DATOS <><><><><><><><><><><><><><>
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://${postgres.service.url}:5432/${postgres.service.database}
+        username: ${postgres.service.username}
+        password: ${postgres.service.password}
+#<><><><><><><><><><><><><><> LOGGING <><><><><><><><><><><><><><>
+logging:
+    level:
+        root: INFO
+        org:
+            hibernate: DEBUG
+#<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
+    jpa:
+        hibernate.ddl-auto: none
+        show-sql: false
+        database: POSTGRESQL
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+        properties:
+            hibernate:
+                jdbc:
+                    lob.non_contextual_creation: true
+        log-level: error
+#<><><><><><><><><><><><><><> POOL DE CONEXIONES A BASE DE DATOS <><><><><><><><><><><><><><>
+    hikari:
+        minimumIdle: 1
+        maximumPoolSize: 1
+        idleTimeout: 15000
+        poolName: SpringBootJPAHikariCPbackbone
+        maxLifetime: 1800000
+        connectionTimeout: 30000
+#<><><><><><><><><><><><><><> PARAMETROS PARA BASE DE DATOS <><><><><><><><><><><><><><>
+postgres:
+    service:
+        name: postgres
+        database: pg_core
+        username: usr_genweb
+        password: 1$Pormas
+#<><><><><><><><><><><><><><> DESCUBRIDOR DE SERVICIO <><><><><><><><><><><><><><>
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: ${EUREKA_URI:https://${eureka.client.url}/eureka}
+            instance:
+                preferIpAddress: true
+                status-page-url-path: https://${eureka.instance.hostName}/info
+                health-check-url: https://${eureka.instance.hostName}/health
+                home-page-url: https://${eureka.instance.hostName}/
+            healtcheck: true
+#<><><><><><><><><><><><><><> SWAGGER <><><><><><><><><><><><><><>
+swagger:
+    base-package: 'com.prx.backoffice.controller'
+    api-info:
+        title: 'PRX Backbone'
+        description: 'Servicios para la gestion de las entidades del sistema'
+        contact:
+            name: 'Luis Antonio Mata'
+            url: 'www.prx.test'
+            email: 'luis.antonio.mata@gmail.com'
+#<><><><><><><><><><><><><><> MENSAJES DEL SERVICIO <><><><><><><><><><><><><><>
+messages:
+    user:
+        solicitud-nula-vacia: 'Datos de solicitud vacios o nulos'
+        login-vacio-nulo: 'Alias de usuario vacio o nulo'
+        clave-vacia-nula: 'Clave de usuario vacia o nula'
+        usuario-creado: 'Usuario creado satisfactoriamente'
+        usuario-existe: 'El alias ingresado ya existe'
+        usuario-invalido: 'El alias ingresado no cumple los valores permitidos'
+        clave-no-permitida: 'La clave ingresada no cumple con los valores requeridos'
+        correo-no-valido: 'El correo ingresado no es valido'
+        correo-existe: 'El correo ingresado ya existe'
+        correo-vacio: 'El correo es vacio o nulo'
+        solicitud-exitosa: 'Solicitud realizada con exito'
+        sin-datos: 'No existe datos de usuarios'
+
+
+---
+spring:
+    profiles: virtual
+#<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
+server:
+    port: 8083
+    http2:
+        enabled: true
+    ssl:
+        enabled: true
+        #    client-auth: NEED
+        key-store: prx_backbone_rest.jks
+        key-store-password: prx-backbone-rest
+        key-store-type: JKS
+        key-alias: prx-backbone-rest
+#<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
+postgres:
+    service:
+        url: 192.168.36.130
+#<><><><><><><><><><><><><><> HTTPS PARA SERVICE DISCOVERY <><><><><><><><><><><><><><>
+eureka:
+    client:
+        url: prx.test:8763
+debug: false
+#<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
+security:
+    discovery:
+        client:
+            name: prx-backbone-rest
+            trust-store-file: prx_backbone_rest_discovery.jks
+            trust-store-password: prx-backbone-rest
+            max-total-connections: 10
+            max-connections-per-host: 10
+#<><><><><><><><><><><><><><> KEYCLOAK <><><><><><><><><><><><><><>
+keycloak:
+    enabled: true
+    realm: prx-access-validator
+    auth-server-url: 'https://srv02.prx.test:8993/auth/'
+    ssl-required: external
+    resource: prx-services
+    bearer-only: true
+    public-client: true
+    confidential-port: 0
+    disable-trust-manager: true
+    security-constraints:
+        - authRoles:
+            - rservice-rest
+        - securityCollections:
+            - patterns: '/user/*'
+            - name: prx-services
