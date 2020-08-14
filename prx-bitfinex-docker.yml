@@ -1,0 +1,100 @@
+---
+app:
+  name: '@pom.artifactId@'
+  version: '@pom.artifactId@'
+#<><><><><><><><><><><><><><> SERVER <><><><><><><><><><><><><><><><><><><><><>
+server:
+  port: 8002
+#<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><><><><><><><><>
+  ssl:
+    enabled: true
+    key-store: xymmetry.jks
+    key-store-password: xymmetry
+    key-store-type: JKS
+    key-alias: www_xymmetry_net
+#<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><><><><><><><>
+spring:
+  profiles:
+#<><><><><><><><><><><><><><> PERFIL ACTVO <><><><><><><><><><><><><><><><><><>
+    active: virtual
+  application:
+    name: '@pom.artifactId@'
+  output:
+    ansi:
+      enabled: DETECT
+  data:
+    rest:
+      base-path: /api
+#<><><><><><><><><><><><><><> SWAGGER <><><><><><><><><><><><><><><><><><><><>
+swagger:
+  base-package: 'com.prx.rt.provider.bitfinex.controller'
+  api-info:
+    title: 'PRX RT Bitfinex'
+    description: 'Cliente Rest para obtencion de datos publicados por Bitfinex'
+    contact:
+      name: 'Luis Antonio Mata'
+      url: 'www.prx.test'
+      email: 'luis.antonio.mata@gmail.com'
+#<><><><><><><><><><><><><><> FEIGN <><><><><><><><><><><><><><><><><><><><>
+feign:
+  client:
+    default-to-properties: false
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+    exchange:
+      find: '/prx-market-provider-config/manager/exchange/find/{token}/{idExchange}'
+    put-info-ticker: '/prx-bridge/hub/putInfoTicker'
+#<><><><><><><><><><><><><><> LOGGING <><><><><><><><><><><><><><><><><><><>
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        security: INFO
+      hibernate: INFO
+      com:
+        prx: INFO
+#<><><><><><><><><><><><><><> SCHEDULER <><><><><><><><><><><><><><><><><><>
+schedule:
+  bitfinex-scheduler:
+    find-market-value: '*/5 * * * * *'
+  properties-scheduler:
+    load-instrument-by-exchange: '0 0 */1 * * *'
+  backup-scheduler:
+    find-market-value: '*/20 * * * * *'
+    rolling-file-date: '0 0 0 * * *'
+#<><><><><><><><><><><><><><> BITFINEX CLIENT <><><><><><><><><><><><><><>
+client:
+  id-exchange: 2
+#<><><><><><><><><><><><><><> REST <><><><><><><><><><><><><><><><><><><><>
+  rest:
+    bitfinex: 'https://api.bitfinex.com/v2/tickers?symbols=ALL'
+    # Expresados en minutos
+    max-time-delay: 120
+    exchange.find.enabled: true
+    exchange-instrument.find.enabled: false
+#<><><><><><><><><><><><><><> WEBSOCKET <><><><><><><><><><><><><><><><><>
+  websocket:
+    tickets: 'wss://api-pub.bitfinex.com/ws/2'
+#<><><><><><><><><><><><><><> EUREKA <><><><><><><><><><><><><><><><><><><>
+eureka:
+  client:
+    enabled: true
+    healtcheck: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://${eureka.client.service.register.hostname}:${eureka.client.service.register.port}/eureka}
+  instance:
+    non-secure-port-enabled: false
+    secure-port-enabled: true
+    preferIpAddress: true
+    status-page-url-path: https://${eureka.instance.hostname}:${eureka.instance.secure-port}/info
+    health-check-url: https://${eureka.instance.hostname}:${eureka.instance.secure-port}/health
+    home-page-url: https://${eureka.instance.hostname}:${eureka.instance.secure-port}/
+#<><><><><><><><><><><><><><> BACKUP <><><><><><><><><><><><><><><><><><><>
+bkp:
+  file-name: ${app.name}.dat
+  directory: '/opt/bkp/${app-name}/'
+debug: false
