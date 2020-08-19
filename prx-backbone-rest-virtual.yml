@@ -21,7 +21,7 @@ postgres:
 #<><><><><><><><><><><><><><> HTTPS PARA SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
     client:
-        url: prx.test:8763
+        url: prx.test/service-monitor/
 debug: false
 #<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
 security:
@@ -36,7 +36,7 @@ security:
 keycloak:
     enabled: true
     realm: prx-access-validator
-    auth-server-url: https://srv02.prx.test:8993/auth/
+    auth-server-url: https://prx.test/auth/
     ssl-required: external
     resource: prx-services
     bearer-only: true
