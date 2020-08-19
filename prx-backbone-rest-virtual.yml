@@ -3,7 +3,7 @@ app:
     version: 1.0.1.20200713-01
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
-    port: 8083
+    port: 8084
     http2:
         enabled: true
     ssl:
