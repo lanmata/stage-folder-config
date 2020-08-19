@@ -66,7 +66,7 @@ postgres:
 #<><><><><><><><><><><><><><> HTTPS PARA SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
     client:
-        url: prx.test/service-monitor
+        url: prx.test/service-monitor:8763
         serviceUrl:
             defaultZone: ${EUREKA_URI:https://${eureka.client.url}/eureka}
             instance:
