@@ -102,6 +102,16 @@ keycloak:
         - securityCollections:
             - patterns: '/user/*'
             - name: prx-services
+#<><><><><><><><><><><><><><> SWAGGER <><><><><><><><><><><><><><>
+swagger:
+    base-package: 'com.prx.backoffice.controller'
+    api-info:
+        title: 'PRX Backbone'
+        description: 'Servicios para la gestion de las entidades del sistema'
+        contact:
+            name: 'Luis Antonio Mata'
+            url: 'www.prx.test'
+            email: 'luis.antonio.mata@gmail.com'
 #<><><><><><><><><><><><><><> MENSAJES DEL SERVICIO <><><><><><><><><><><><><><>
 messages:
     user:
