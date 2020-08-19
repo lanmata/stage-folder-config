@@ -1,6 +1,6 @@
 app:
-    name: '@pom.artifactId@'
-    version: '@pom.artifactId@'
+    name: prx-backbone-rest
+    version: 1.0.1.20200713-01
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
     port: 8083
@@ -20,7 +20,7 @@ spring:
     profiles:
         active: docker
     application:
-        name: '@pom.artifactId@'
+        name: prx-backbone-rest
     output:
         ansi:
             enabled: DETECT
