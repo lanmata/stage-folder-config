@@ -16,8 +16,6 @@ spring:
     main:
         allow-bean-definition-overriding: true
         banner-mode: console
-    profiles:
-        active: docker
     application:
         name: prx-backbone-rest
     cloud:
