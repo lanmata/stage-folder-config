@@ -21,6 +21,14 @@ spring:
         active: docker
     application:
         name: prx-backbone-rest
+    cloud:
+        inetutils:
+            ignoredInterfaces:
+                - docker
+                - eth.*
+                - lo
+            preferredNetworks:
+                - 172.18.0
     output:
         ansi:
             enabled: DETECT
