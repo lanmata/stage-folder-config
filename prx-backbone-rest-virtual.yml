@@ -62,7 +62,7 @@ jpa:
 #<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
 postgres:
     service:
-        url: prx.test
+        url: host.docker.internal
         name: postgres
         database: tradeskey
         username: usr_genweb
