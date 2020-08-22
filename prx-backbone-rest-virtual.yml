@@ -8,7 +8,6 @@ server:
         enabled: true
     ssl:
         enabled: true
-        #    client-auth: NEED
         key-store: prx_backbone_rest.jks
         key-store-password: prx-backbone-rest
         key-store-type: JKS
@@ -71,7 +70,7 @@ postgres:
         username: usr_genweb
         password: 1$Pormas
 
-#<><><><><><><><><><><><><><> HTTPS PARA SERVICE DISCOVERY <><><><><><><><><><><><><><>
+#<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
     client:
         url: 172.18.0.3
@@ -85,9 +84,10 @@ eureka:
         leaseRenewalIntervalInSeconds: 30
         hostName: prx.test
         preferIpAddress: true
-        status-page-url-path: https://${eureka.instance.hostName}/info
-        health-check-url: https://${eureka.instance.hostName}/health
-        home-page-url: https://${eureka.instance.hostName}/
+        status-page-url-path: http://${eureka.instance.hostName}:${server.port}/actuator/info
+        health-check-url: http://${eureka.instance.hostName}:${server.port}/actuator/health
+        home-page-url: http://${eureka.instance.hostName}:${server.port}/
+        port: ${server.port}
 debug: false
 #<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
 security:
