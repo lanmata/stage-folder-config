@@ -69,11 +69,10 @@ postgres:
         database: tradeskey
         username: usr_genweb
         password: 1$Pormas
-
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
     client:
-        url: 172.18.0.3
+        url: prx.test
         port: 8763
         register-with-eureka: true
         enable: true
@@ -84,9 +83,9 @@ eureka:
         leaseRenewalIntervalInSeconds: 30
         hostName: prx.test
         preferIpAddress: true
-        status-page-url-path: http://${eureka.instance.hostName}:${server.port}/actuator/info
-        health-check-url: http://${eureka.instance.hostName}:${server.port}/actuator/health
-        home-page-url: http://${eureka.instance.hostName}:${server.port}/
+        status-page-url-path: https://${eureka.instance.hostName}:${server.port}/actuator/info
+        health-check-url: https://${eureka.instance.hostName}:${server.port}/actuator/health
+        home-page-url: https://${eureka.instance.hostName}:${server.port}/
         port: ${server.port}
 debug: false
 #<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
