@@ -97,7 +97,7 @@ security:
             max-connections-per-host: 10
 #<><><><><><><><><><><><><><> KEYCLOAK <><><><><><><><><><><><><><>
 keycloak:
-    enabled: true
+    enabled: false
     realm: prx-access-validator
     auth-server-url: https://prx.test/auth/
     ssl-required: external
