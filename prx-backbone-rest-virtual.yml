@@ -42,13 +42,13 @@ spring:
         password: ${postgres.service.password}
         #<><><><><><><><><><><><><><> POOL DE CONEXIONES A BASE DE DATOS <><><><><><><><><><><><><><>
         hikari:
-          minimumIdle: 1
-          maximumPoolSize: 1
-          idleTimeout: 15000
-          poolName: SpringBootJPAHikariCPbackbone
-          maxLifetime: 1800000
-          connectionTimeout: 30000
-#<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
+            minimumIdle: 1
+            maximumPoolSize: 1
+            idleTimeout: 15000
+            poolName: SpringBootJPAHikariCPbackbone
+            maxLifetime: 1800000
+            connectionTimeout: 30000
+    #<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
     jpa:
         hibernate.ddl-auto: none
         show-sql: false
