@@ -116,7 +116,7 @@ keycloak:
 swagger:
     base-package: 'com.prx.backoffice.controller'
     api-info:
-        title: 'PRX Backbone'
+        title: 'PRX Backbone REST'
         description: 'Servicios para la gestion de las entidades del sistema'
         contact:
             name: 'Luis Antonio Mata'
@@ -137,3 +137,9 @@ messages:
         correo-vacio: 'El correo es vacio o nulo'
         solicitud-exitosa: 'Solicitud realizada con exito'
         sin-datos: 'No existe datos de usuarios'
+    service:
+        general:
+            ok: 'OK'
+            nok: 'No Encontrado'
+            not-authorized: 'No Autorizado'
+            error: 'Error interno de servidor'

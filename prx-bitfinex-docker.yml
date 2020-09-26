@@ -5,7 +5,7 @@ app:
 #<><><><><><><><><><><><><><> SERVER <><><><><><><><><><><><><><><><><><><><><>
 server:
   port: 8002
-#<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><><><><><><><><>
+  #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><><><><><><><><>
   ssl:
     enabled: true
     key-store: xymmetry.jks
@@ -15,7 +15,7 @@ server:
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><><><><><><><>
 spring:
   profiles:
-#<><><><><><><><><><><><><><> PERFIL ACTVO <><><><><><><><><><><><><><><><><><>
+    #<><><><><><><><><><><><><><> PERFIL ACTVO <><><><><><><><><><><><><><><><><><>
     active: virtual
   application:
     name: '@pom.artifactId@'
@@ -69,14 +69,14 @@ schedule:
 #<><><><><><><><><><><><><><> BITFINEX CLIENT <><><><><><><><><><><><><><>
 client:
   id-exchange: 2
-#<><><><><><><><><><><><><><> REST <><><><><><><><><><><><><><><><><><><><>
+  #<><><><><><><><><><><><><><> REST <><><><><><><><><><><><><><><><><><><><>
   rest:
     bitfinex: 'https://api.bitfinex.com/v2/tickers?symbols=ALL'
     # Expresados en minutos
     max-time-delay: 120
     exchange.find.enabled: true
     exchange-instrument.find.enabled: false
-#<><><><><><><><><><><><><><> WEBSOCKET <><><><><><><><><><><><><><><><><>
+  #<><><><><><><><><><><><><><> WEBSOCKET <><><><><><><><><><><><><><><><><>
   websocket:
     tickets: 'wss://api-pub.bitfinex.com/ws/2'
 #<><><><><><><><><><><><><><> EUREKA <><><><><><><><><><><><><><><><><><><>
