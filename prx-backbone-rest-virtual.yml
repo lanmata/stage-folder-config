@@ -64,7 +64,7 @@ postgres:
     service:
         url: database-1.csoaiazs7rxp.sa-east-1.rds.amazonaws.com
         name: postgres
-        database: tradeskey
+        database: general
         username: usr_genweb
         password: UsU075qjjgCtdWxS3rxgjwCoCmWjdQ1FrhBYapZs
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
