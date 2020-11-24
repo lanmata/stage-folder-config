@@ -70,7 +70,7 @@ postgres:
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
     client:
-        url: prx.test
+        url: localhost
         port: 8763
         register-with-eureka: true
         enable: true
