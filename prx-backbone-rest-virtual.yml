@@ -5,9 +5,9 @@ app:
 server:
     port: 8084
     http2:
-        enabled: true
+        enabled: false
     ssl:
-        enabled: true
+        enabled: false
         key-store: prx_backbone_rest.jks
         key-store-password: prx-backbone-rest
         key-store-type: JKS
