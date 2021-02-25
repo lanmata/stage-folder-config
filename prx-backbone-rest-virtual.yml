@@ -5,9 +5,9 @@ app:
 server:
     port: 8084
     http2:
-        enabled: false
+        enabled: true
     ssl:
-        enabled: false
+        enabled: true
         key-store: prx_backbone_rest.jks
         key-store-password: prx-backbone-rest
         key-store-type: JKS
@@ -97,7 +97,7 @@ security:
             max-connections-per-host: 10
 #<><><><><><><><><><><><><><> KEYCLOAK <><><><><><><><><><><><><><>
 keycloak:
-    enabled: true
+    enabled: false
     realm: prx-access-validator
     auth-server-url: https://prx.test/auth/
     ssl-required: external
