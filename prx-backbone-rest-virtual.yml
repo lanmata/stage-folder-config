@@ -122,6 +122,14 @@ swagger:
             name: 'Luis Antonio Mata'
             url: 'www.prx.test'
             email: 'luis.antonio.mata@gmail.com'
+springfox:
+  documentation:
+    swagger:
+      enable: true
+      v2:
+        use-model-v3: true
+    swagger-ui:
+      base-url: /documentacion
 #<><><><><><><><><><><><><><> MENSAJES DEL SERVICIO <><><><><><><><><><><><><><>
 messages:
     user:
