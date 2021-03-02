@@ -129,7 +129,7 @@ springfox:
       v2:
         use-model-v3: true
     swagger-ui:
-      base-url: /documentation
+      base-url: /
 #<><><><><><><><><><><><><><> MENSAJES DEL SERVICIO <><><><><><><><><><><><><><>
 messages:
     user:
