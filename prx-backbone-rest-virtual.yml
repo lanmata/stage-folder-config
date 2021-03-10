@@ -110,6 +110,7 @@ keycloak:
     ssl-required: external
     resource: prx-services
     bearer-only: true
+    use-resource-role-mappings: true
     public-client: true
     confidential-port: 0
     disable-trust-manager: true
