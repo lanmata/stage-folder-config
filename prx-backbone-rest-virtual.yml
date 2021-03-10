@@ -17,7 +17,7 @@ spring:
         allow-bean-definition-overriding: true
         banner-mode: console
     application:
-        name: prx-backbone-rest
+        name: ${app.name}
         description: Servicio de integracion
     cloud:
         inetutils:
