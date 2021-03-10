@@ -98,9 +98,9 @@ security:
     - basicAuth: ["lmata":"123456"]  # <-- use the same name here
 components:
     securitySchemes:
-      basicAuth:     # <-- arbitrary name for the security scheme
-        type: http
-        scheme: basic
+        basicAuth:     # <-- arbitrary name for the security scheme
+            type: http
+            scheme: basic
 #<><><><><><><><><><><><><><> KEYCLOAK <><><><><><><><><><><><><><>
 keycloak:
     enabled: false
@@ -129,13 +129,13 @@ swagger:
             url: 'www.prx.test'
             email: 'luis.antonio.mata@gmail.com'
 springfox:
-  documentation:
-    swagger:
-      enable: true
-      v2:
-        use-model-v3: true
-    swagger-ui:
-      base-url: /
+    documentation:
+        swagger:
+            enable: true
+            v2:
+                use-model-v3: true
+        swagger-ui:
+            base-url: /
 #<><><><><><><><><><><><><><> MENSAJES DEL SERVICIO <><><><><><><><><><><><><><>
 messages:
     user:
