@@ -88,7 +88,7 @@ eureka:
 debug: false
 #<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
 security:
-    - basicAuth: ["lmata:123456"]  # <-- use the same name here
+#    - basicAuth: ["lmata:123456"]  # <-- use the same name here
     discovery:
         client:
             name: prx-backbone-rest
