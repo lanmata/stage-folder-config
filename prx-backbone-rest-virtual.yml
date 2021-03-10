@@ -118,7 +118,7 @@ keycloak:
         - authRoles:
               - rservice-rest
         - securityCollections:
-              - patterns: '/user/*'
+              - patterns: '/*'
               - name: prx-services
 #<><><><><><><><><><><><><><> SWAGGER <><><><><><><><><><><><><><>
 swagger:
