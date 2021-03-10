@@ -95,6 +95,12 @@ security:
             trust-store-password: prx-backbone-rest
             max-total-connections: 10
             max-connections-per-host: 10
+    - basicAuth: ["lmata":"123456"]  # <-- use the same name here
+components:
+    securitySchemes:
+      basicAuth:     # <-- arbitrary name for the security scheme
+        type: http
+        scheme: basic
 #<><><><><><><><><><><><><><> KEYCLOAK <><><><><><><><><><><><><><>
 keycloak:
     enabled: false
