@@ -105,7 +105,6 @@ components:
 #<><><><><><><><><><><><><><> KEYCLOAK <><><><><><><><><><><><><><>
 keycloak:
     enabled: true
-    client-secret: 5f28a328-f727-4ad7-820e-e7dea274e895
     realm: prx-access-validator
     auth-server-url: https://prx.test/auth/
     ssl-required: external
