@@ -71,7 +71,7 @@ postgres:
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
     client:
-        url: eureka
+        url: service-monitor
         port: 8763
         register-with-eureka: true
         enable: true
