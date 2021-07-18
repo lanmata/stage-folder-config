@@ -80,7 +80,7 @@ eureka:
             defaultZone: https://${eureka.client.url}:${eureka.client.port}/eureka/
     instance:
         leaseRenewalIntervalInSeconds: 30
-        hostName: prx.test
+        hostName: service-monitor
         preferIpAddress: true
         status-page-url-path: https://${eureka.instance.hostName}:${server.port}/actuator/info
         health-check-url: https://${eureka.instance.hostName}:${server.port}/actuator/health
@@ -103,23 +103,23 @@ components:
             type: http
             scheme: basic
 #<><><><><><><><><><><><><><> KEYCLOAK <><><><><><><><><><><><><><>
-keycloak:
-    enabled: true
-    realm: prx-access-validator
-    auth-server-url: https://prx.test/auth/
-    ssl-required: external
-    resource: prx-services
-    bearer-only: true
-    use-resource-role-mappings: true
-    public-client: true
-    confidential-port: 0
-    disable-trust-manager: true
-    security-constraints:
-        - authRoles:
-              - rservice-rest
-        - securityCollections:
-              - patterns: '/v1/*'
-              - name: prx-services
+#keycloak:
+#    enabled: true
+#    realm: prx-access-validator
+#    auth-server-url: https://prx.test/auth/
+#    ssl-required: external
+#    resource: prx-services
+#    bearer-only: true
+#    use-resource-role-mappings: true
+#    public-client: true
+#    confidential-port: 0
+#    disable-trust-manager: true
+#    security-constraints:
+#        - authRoles:
+#              - rservice-rest
+#        - securityCollections:
+#              - patterns: '/v1/*'
+#              - name: prx-services
 #<><><><><><><><><><><><><><> SWAGGER <><><><><><><><><><><><><><>
 swagger:
     base-package: 'com.prx.backoffice.controller'
