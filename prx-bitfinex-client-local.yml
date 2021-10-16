@@ -6,6 +6,8 @@ app:
 server:
   port: 8002
   #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><><><><><><><><>
+  http2:
+    enabled: true
   ssl:
     enabled: true
     key-store: prx_backbone_rest.jks
@@ -14,6 +16,20 @@ server:
     key-alias: prx-backbone-rest
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><><><><><><><>
 spring:
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: console
+    application:
+      name: ${app.name}
+      description: Cliente del proveedor Bitfinex
+    cloud:
+      inetutils:
+        ignoredInterfaces:
+          - docker
+          - eth.*
+          - lo
+        preferredNetworks:
+          - 172.18.0
   output:
     ansi:
       enabled: DETECT
