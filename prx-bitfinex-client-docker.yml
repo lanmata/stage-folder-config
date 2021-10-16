@@ -14,11 +14,6 @@ server:
     key-alias: www_xymmetry_net
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><><><><><><><>
 spring:
-  profiles:
-    #<><><><><><><><><><><><><><> PERFIL ACTVO <><><><><><><><><><><><><><><><><><>
-    active: virtual
-  application:
-    name: '@pom.artifactId@'
   output:
     ansi:
       enabled: DETECT
