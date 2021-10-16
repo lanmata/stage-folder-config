@@ -86,7 +86,7 @@ eureka:
       defaultZone: https://${eureka.client.url}:${eureka.client.port}/eureka/
   instance:
     leaseRenewalIntervalInSeconds: 30
-    hostName: service-monitor
+    hostName: localhost
     preferIpAddress: true
     status-page-url-path: https://${eureka.instance.hostName}:${server.port}/actuator/info
     health-check-url: https://${eureka.instance.hostName}:${server.port}/actuator/health
