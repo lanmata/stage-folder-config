@@ -82,17 +82,21 @@ client:
 #<><><><><><><><><><><><><><> EUREKA <><><><><><><><><><><><><><><><><><><>
 eureka:
   client:
-    enabled: true
+    url: service-monitor
+    port: 8763
+    register-with-eureka: true
+    enable: true
     healtcheck: true
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://${eureka.client.service.register.hostname}:${eureka.client.service.register.port}/eureka}
+      defaultZone: https://${eureka.client.url}:${eureka.client.port}/eureka/
   instance:
-    non-secure-port-enabled: false
-    secure-port-enabled: true
+    leaseRenewalIntervalInSeconds: 30
+    hostName: service-monitor
     preferIpAddress: true
-    status-page-url-path: https://${eureka.instance.hostname}:${eureka.instance.secure-port}/info
-    health-check-url: https://${eureka.instance.hostname}:${eureka.instance.secure-port}/health
-    home-page-url: https://${eureka.instance.hostname}:${eureka.instance.secure-port}/
+    status-page-url-path: https://${eureka.instance.hostName}:${server.port}/actuator/info
+    health-check-url: https://${eureka.instance.hostName}:${server.port}/actuator/health
+    home-page-url: https://${eureka.instance.hostName}:${server.port}/
+    port: ${server.port}
 #<><><><><><><><><><><><><><> BACKUP <><><><><><><><><><><><><><><><><><><>
 bkp:
   file-name: ${app.name}.dat

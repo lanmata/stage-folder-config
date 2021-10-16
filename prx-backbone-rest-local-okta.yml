@@ -71,7 +71,7 @@ postgres:
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
     client:
-        url: service-monitor
+        url: localhost
         port: 8763
         register-with-eureka: true
         enable: true
@@ -89,7 +89,7 @@ eureka:
 debug: false
 #<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
 security:
-#    - basicAuth: ["lmata:123456"]  # <-- use the same name here
+    #    - basicAuth: ["lmata:123456"]  # <-- use the same name here
     discovery:
         client:
             name: prx-backbone-rest
