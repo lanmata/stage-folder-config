@@ -77,7 +77,7 @@ client:
 #<><><><><><><><><><><><><><> EUREKA <><><><><><><><><><><><><><><><><><><>
 eureka:
   client:
-    url: service-monitor
+    url: localhost
     port: 8763
     register-with-eureka: true
     enable: true
