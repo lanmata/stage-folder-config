@@ -63,17 +63,22 @@ schedule:
     rolling-file-date: '0 0 0 * * *'
 #<><><><><><><><><><><><><><> BITFINEX CLIENT <><><><><><><><><><><><><><>
 client:
-  id-exchange: 2
+  exchange:
+    id: 2
+    name: Bitfinex
   #<><><><><><><><><><><><><><> REST <><><><><><><><><><><><><><><><><><><><>
-  rest:
-    bitfinex: 'https://api.bitfinex.com/v2/tickers?symbols=ALL'
-    # Expresados en minutos
-    max-time-delay: 120
-    exchange.find.enabled: true
-    exchange-instrument.find.enabled: false
+    rest:
+      tickers:
+        url: 'https://api.bitfinex.com/v2/tickers?symbols=ALL'
+      # Expresados en minutos
+        max-time-delay: 120
+        exchange.find.enabled: true
+        exchange-instrument.find.enabled: false
+        print: false
   #<><><><><><><><><><><><><><> WEBSOCKET <><><><><><><><><><><><><><><><><>
-  websocket:
-    tickets: 'wss://api-pub.bitfinex.com/ws/2'
+    websocket:
+      tickets:
+        url: 'wss://api-pub.bitfinex.com/ws/2'
 #<><><><><><><><><><><><><><> EUREKA <><><><><><><><><><><><><><><><><><><>
 eureka:
   client:
