@@ -71,7 +71,7 @@ logging:
 #<><><><><><><><><><><><><><> SCHEDULER <><><><><><><><><><><><><><><><><><>
 schedule:
   bitfinex-scheduler:
-    find-market-value: '*/5 * * * * *'
+    find-market-value: '*/1 * * * * *'
   properties-scheduler:
     load-instrument-by-exchange: '0 0 */1 * * *'
   backup-scheduler:
@@ -95,6 +95,14 @@ client:
     websocket:
       tickets:
         url: 'wss://api-pub.bitfinex.com/ws/2'
+#<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
+postgres:
+    service:
+        url: database-1.csoaiazs7rxp.sa-east-1.rds.amazonaws.com
+        name: postgres
+        database: pawfairy
+        username: usr_genweb
+        password: UsU075qjjgCtdWxS3rxgjwCoCmWjdQ1FrhBYapZs
 #<><><><><><><><><><><><><><> EUREKA <><><><><><><><><><><><><><><><><><><>
 eureka:
   client:
