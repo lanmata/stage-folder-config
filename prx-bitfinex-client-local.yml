@@ -37,13 +37,13 @@ spring:
     rest:
       base-path: /api
   rabbitmq:
+    port: 5762
+    host: localhost
+    username: lmata
+    password: 13515030
     client:
-      exchange: instruments
       routing-key: data
-      host: localhost
-      port: 5762
-      username: lmata
-      password: 13515030
+      exchange: instruments
 #<><><><><><><><><><><><><><> SWAGGER <><><><><><><><><><><><><><><><><><><><>
 swagger:
   base-package: 'com.prx.rt.provider.bitfinex.controller'
