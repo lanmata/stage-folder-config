@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="/Dummy.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/fragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../ambients/repository/com/prx/commons/prx-commons/1.0.3.20210220-01/prx-commons-1.0.3.20210220-01.jar!/com/prx/commons/config/Swagger2Config.class">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../ambients/repository/com/prx/commons/prx-commons/1.0.3.20210220-01/prx-commons-1.0.3.20210220-01.jar!/com/prx/commons/pojo/Feature.class">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../ambients/repository/com/prx/commons/prx-commons/1.0.3.20210220-01/prx-commons-1.0.3.20210220-01.jar!/com/prx/commons/to/Request.class">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../ambients/repository/com/prx/commons/prx-commons/1.0.3.20210220-01/prx-commons-1.0.3.20210220-01.jar!/com/prx/commons/to/Response.class">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/PrxBackofficeRestApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/config/CustomAccessDeniedHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/config/CustomAuthenticationFailureHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/config/CustomLogoutSuccessHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/config/SecSecurityConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/config/keycloak/CustomKeycloakSpringBootConfigResolver.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/config/keycloak/SecSecurityConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/config/keycloak/SecurityConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/controller/FeatureController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/controller/RolController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/controller/UserController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/service/impl/FeatureServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/service/impl/UserServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/to/feature/FeatureListResponse.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/java/com/prx/backoffice/util/MessageUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/main/resources/bootstrap.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/test/java/com/prx/backoffice/MockLoaderBase.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/test/java/com/prx/backoffice/controller/PersonControllerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/test/java/com/prx/backoffice/controller/UserControllerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../backbone-rest/src/test/resources/boostrap.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../central/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../commons/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../commons/src/main/java/com/prx/commons/config/Swagger2Config.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../commons/src/main/java/com/prx/commons/pojo/VendorExtensionImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../commons/src/main/java/com/prx/commons/to/Response.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../config-server/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../demo/src/main/resources/bootstrap.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../persistence/src/main/java/com/prx/persistence/general/domains/RolFeaturePK.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../persistence/src/main/java/com/prx/persistence/general/domains/UserRolEntity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../persistence/src/main/java/com/prx/persistence/general/domains/UserRolPK.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../persistence/src/main/java/com/prx/persistence/general/repositories/RolRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../persistence/src/test/java/com/prx/persistence/general/domains/UserRolEntityTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../service-monitor/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/prx-backbone-rest-virtual.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../witi/alsea/digitalizacion-backend/src/main/java/com/tenpines/alsea/digitalizacion/server/model/ajustes/ImputacionDeAjuste.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../witi/alsea/digitalizacion-backend/src/main/java/com/tenpines/alsea/digitalizacion/server/service/implementations/export/PurchaseOrderExportStrategy.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
