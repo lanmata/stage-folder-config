@@ -14,9 +14,14 @@ server:
         key-store-type: JKS
         key-alias: prx-backbone-rest
 #<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
+#<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
 postgres:
     service:
-        url: 192.168.36.130
+        url: localhost
+        name: postgres
+        database: prxdb
+        username: usr_genweb
+        password: UsU075qjjgCtdWxS3rxgjwCoCmWjdQ1FrhBYapZs
 #<><><><><><><><><><><><><><> HTTPS PARA SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
     client:
