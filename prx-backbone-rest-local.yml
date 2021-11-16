@@ -92,9 +92,9 @@ security:
 #    - basicAuth: ["lmata:123456"]  # <-- use the same name here
     discovery:
         client:
-            name: prx-backbone-rest
-            trust-store-file: prx_backbone_rest_discovery.jks
-            trust-store-password: prx-backbone-rest
+            name: prx-service-monitor
+            trust-store-file: prx_srv_monitor.jks
+            trust-store-password: prx-service-monitor
             max-total-connections: 10
             max-connections-per-host: 10
 components:
