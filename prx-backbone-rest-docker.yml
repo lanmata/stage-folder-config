@@ -65,7 +65,7 @@ postgres:
     service:
         url: localhost
         name: postgres
-        database: pawfairy
+        database: prxdb
         username: usr_genweb
         password: UsU075qjjgCtdWxS3rxgjwCoCmWjdQ1FrhBYapZs
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
