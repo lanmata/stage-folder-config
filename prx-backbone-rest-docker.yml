@@ -63,7 +63,7 @@ spring:
 #<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
 postgres:
     service:
-        url: database-1.csoaiazs7rxp.sa-east-1.rds.amazonaws.com
+        url: localhost
         name: postgres
         database: pawfairy
         username: usr_genweb
