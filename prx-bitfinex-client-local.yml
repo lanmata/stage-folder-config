@@ -129,6 +129,16 @@ eureka:
     health-check-url: https://${eureka.instance.hostName}:${server.port}/actuator/health
     home-page-url: https://${eureka.instance.hostName}:${server.port}/
     port: ${server.port}
+#<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
+security:
+#    - basicAuth: ["lmata:123456"]  # <-- use the same name here
+    discovery:
+        client:
+            name: prx-service-monitor
+            trust-store-file: prx_srv_monitor.jks
+            trust-store-password: prx-service-monitor
+            max-total-connections: 10
+            max-connections-per-host: 10
 #<><><><><><><><><><><><><><> BACKUP <><><><><><><><><><><><><><><><><><><>
 bkp:
   file-name: ${app.name}.dat
