@@ -44,14 +44,24 @@ spring:
             enabled: true
             path: /h2
     datasource:
-        driver-class-name: org.h2.Driver
-        url: jdbc:h2:mem:GENERAL
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://${postgres.service.url}:5432/${postgres.service.database}
         username: ${postgres.service.username}
         password: ${postgres.service.password}
+        #<><><><><><><><><><><><><><> POOL DE CONEXIONES A BASE DE DATOS <><><><><><><><><><><><><><>
+        hikari:
+            minimumIdle: 1
+            maximumPoolSize: 1
+            idleTimeout: 15000
+            poolName: SpringBootJPAHikariCPbackbone
+            maxLifetime: 1800000
+            connectionTimeout: 30000
+            driver-class-name: org.hibernate.dialect.H2Dialect
+            schema: general
+            connection-init-sql: 'CREATE SCHEMA IF NOT EXISTS GENERAL AUTHORIZATION ownerUserName usr_web'
     #<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
     jpa:
-        hibernate.ddl-auto: create
-        generate-ddl: true
+        hibernate.ddl-auto: none
         show-sql: false
         database: h2
         database-platform: org.hibernate.dialect.H2Dialect
