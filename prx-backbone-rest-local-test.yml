@@ -51,7 +51,7 @@ spring:
             connectionTimeout: 30000
     #<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
     jpa:
-        hibernate.ddl-auto: create-drop
+        hibernate.ddl-auto: create
         show-sql: false
         database: h2
         database-platform: org.hibernate.dialect.H2Dialect
