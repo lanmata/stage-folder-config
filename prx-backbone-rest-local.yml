@@ -51,6 +51,7 @@ spring:
             connectionTimeout: 30000
             driver-class-name: org.hibernate.dialect.H2Dialect
             schema: general
+            connection-init-sql: 'CREATE SCHEMA IF NOT EXISTS GENERAL AUTHORIZATION ownerUserName usr_web'
     #<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
     jpa:
         hibernate.ddl-auto: none
