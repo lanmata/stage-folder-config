@@ -38,7 +38,7 @@ spring:
     #<><><><><><><><><><><><><><> BASE DE DATOS <><><><><><><><><><><><><><>
     datasource:
         driver-class-name: org.h2.Driver
-        url: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:mem:GENERAL;DB_CLOSE_DELAY=-1
         username: ${postgres.service.username}
         password: ${postgres.service.password}
     #<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
