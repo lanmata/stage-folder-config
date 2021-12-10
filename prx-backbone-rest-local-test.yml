@@ -51,6 +51,7 @@ spring:
     #<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
     jpa:
         hibernate.ddl-auto: create
+        generate-ddl: true
         show-sql: false
         database: h2
         database-platform: org.hibernate.dialect.H2Dialect
