@@ -36,9 +36,13 @@ spring:
         rest:
             base-path: /api
     #<><><><><><><><><><><><><><> BASE DE DATOS <><><><><><><><><><><><><><>
+    h2:
+        console:
+            enabled: true
+            path: /h2
     datasource:
         driver-class-name: org.h2.Driver
-        url: jdbc:h2:mem:GENERAL;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:mem:GENERAL;
         username: ${postgres.service.username}
         password: ${postgres.service.password}
     #<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
