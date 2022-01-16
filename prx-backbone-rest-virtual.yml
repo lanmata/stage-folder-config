@@ -65,7 +65,7 @@ postgres:
     service:
         url: localhost
         name: postgres
-        database: prxdb
+        database: PRX
         username: usr_genweb
         password: UsU075qjjgCtdWxS3rxgjwCoCmWjdQ1FrhBYapZs
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
