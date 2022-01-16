@@ -54,7 +54,7 @@ spring:
     jpa:
         hibernate.ddl-auto: none
         show-sql: false
-        open-in-view: disable
+        open-in-view: false
         database: POSTGRESQL
         database-platform: org.hibernate.dialect.PostgreSQL9Dialect
         properties:
