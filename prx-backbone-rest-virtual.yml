@@ -123,13 +123,13 @@ keycloak:
 #<><><><><><><><><><><><><><> SWAGGER <><><><><><><><><><><><><><>
 swagger:
     base-package: 'com.prx.backoffice.controller'
-    api-info:
-        title: 'PRX Backbone REST'
-        description: 'Servicios para la gestion de las entidades del sistema'
-        contact:
-            name: 'Luis Antonio Mata'
-            url: 'www.prx.test'
-            email: 'luis.antonio.mata@gmail.com'
+api-info:
+    title: 'PRX Backbone REST'
+    description: 'Servicios para la gestion de las entidades del sistema'
+    contact:
+        name: 'Luis Antonio Mata'
+        url: 'www.prx.test'
+        email: 'luis.antonio.mata@gmail.com'
 springfox:
     documentation:
         swagger:
