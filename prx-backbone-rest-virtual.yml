@@ -1,3 +1,4 @@
+#IMPORTANT: This is the latest version
 app:
     name: prx-backbone-rest
     version: 1.0.1.20200713-01
@@ -53,6 +54,7 @@ spring:
     jpa:
         hibernate.ddl-auto: none
         show-sql: false
+        open-in-view: disable
         database: POSTGRESQL
         database-platform: org.hibernate.dialect.PostgreSQL9Dialect
         properties:
