@@ -74,6 +74,7 @@ postgres:
 eureka:
     client:
         url: prx.test/eureka
+        port: 8763
         register-with-eureka: true
         enable: true
         healtcheck: true
