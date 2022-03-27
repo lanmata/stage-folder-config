@@ -1,3 +1,4 @@
+#IMPORTANT: This is the latest version
 app:
     name: prx-backbone-rest
     version: 1.0.1.20200713-01
@@ -53,6 +54,7 @@ spring:
     jpa:
         hibernate.ddl-auto: none
         show-sql: false
+        open-in-view: false
         database: POSTGRESQL
         database-platform: org.hibernate.dialect.PostgreSQL9Dialect
         properties:
@@ -63,16 +65,15 @@ spring:
 #<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
 postgres:
     service:
-        url: database-1.csoaiazs7rxp.sa-east-1.rds.amazonaws.com
+        url: prx.test
         name: postgres
-        database: pawfairy
+        database: PRX
         username: usr_genweb
         password: UsU075qjjgCtdWxS3rxgjwCoCmWjdQ1FrhBYapZs
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
     client:
-        url: service-monitor
-        port: 8763
+        url: prx.test/eureka
         register-with-eureka: true
         enable: true
         healtcheck: true
@@ -80,7 +81,7 @@ eureka:
             defaultZone: https://${eureka.client.url}:${eureka.client.port}/eureka/
     instance:
         leaseRenewalIntervalInSeconds: 30
-        hostName: service-monitor
+        hostName: prx.test
         preferIpAddress: true
         status-page-url-path: https://${eureka.instance.hostName}:${server.port}/actuator/info
         health-check-url: https://${eureka.instance.hostName}:${server.port}/actuator/health
@@ -89,7 +90,7 @@ eureka:
 debug: false
 #<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
 security:
-#    - basicAuth: ["lmata:123456"]  # <-- use the same name here
+    #    - basicAuth: ["lmata:123456"]  # <-- use the same name here
     discovery:
         client:
             name: prx-backbone-rest
@@ -103,33 +104,34 @@ components:
             type: http
             scheme: basic
 #<><><><><><><><><><><><><><> KEYCLOAK <><><><><><><><><><><><><><>
-#keycloak:
-#    enabled: true
-#    realm: prx-access-validator
-#    auth-server-url: https://prx.test/auth/
-#    ssl-required: external
-#    resource: prx-services
-#    bearer-only: true
-#    use-resource-role-mappings: true
-#    public-client: true
-#    confidential-port: 0
-#    disable-trust-manager: true
-#    security-constraints:
-#        - authRoles:
-#              - rservice-rest
-#        - securityCollections:
-#              - patterns: '/v1/*'
-#              - name: prx-services
+keycloak:
+    enabled: true
+    realm: prx-access-validator
+    auth-server-url: https://prx.test/auth/
+    ssl-required: external
+    resource: prx-services
+    bearer-only: true
+    use-resource-role-mappings: true
+    public-client: true
+    confidential-port: 0
+    disable-trust-manager: true
+    security-constraints:
+        - authRoles:
+              - rservice-rest
+        - securityCollections:
+              - patterns: '/v1/*'
+              - name: prx-services
 #<><><><><><><><><><><><><><> SWAGGER <><><><><><><><><><><><><><>
 swagger:
     base-package: 'com.prx.backoffice.controller'
-    api-info:
-        title: 'PRX Backbone REST'
-        description: 'Servicios para la gestion de las entidades del sistema'
-        contact:
-            name: 'Luis Antonio Mata'
-            url: 'www.prx.test'
-            email: 'luis.antonio.mata@gmail.com'
+api-info:
+    title: 'PRX Backbone REST'
+    description: 'Servicios para la gestion de las entidades del sistema'
+    contact:
+        name: 'Luis Antonio Mata'
+        url: 'www.prx.test'
+        email: 'luis.antonio.mata@gmail.com'
+    version: ${}
 springfox:
     documentation:
         swagger:
