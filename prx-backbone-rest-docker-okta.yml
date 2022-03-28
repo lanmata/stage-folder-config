@@ -95,7 +95,7 @@ security:
     discovery:
         client:
             name: prx-backbone-rest
-            trust-store-file: prx_srv_monitor.jks
+            trust-store-file: prx_backbone_rest_discovery.jks
             trust-store-password: prx-backbone-rest
             max-total-connections: 10
             max-connections-per-host: 10
