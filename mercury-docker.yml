@@ -28,7 +28,6 @@ server:
         enabled: true
     ssl:
         enabled: true
-        #    client-auth: NEED
         key-store: prx_backbone_rest.jks
         key-store-password: prx-backbone-rest
         key-store-type: JKS
@@ -39,14 +38,33 @@ postgres:
         url: localhost
 #<><><><><><><><><><><><><><> HTTPS PARA SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
-    instance:
-        hostname: 172.18.0.3
-        secure-port: 8763
     client:
-        service-url:
-            defaultZone: ${EUREKA_URI:https://${eureka.instance.hostname}:${eureka.instance.secure-port}/eureka}
-        url: 172.18.0.3:8763
+        url: service-monitor
+        port: 8763
+        register-with-eureka: true
+        enable: true
+        healtcheck: true
+        serviceUrl:
+            defaultZone: https://${eureka.client.url}:${eureka.client.port}/eureka/
+    instance:
+        leaseRenewalIntervalInSeconds: 30
+        hostName: service-monitor
+        preferIpAddress: true
+        status-page-url-path: https://${eureka.instance.hostName}:${server.port}/actuator/info
+        health-check-url: https://${eureka.instance.hostName}:${server.port}/actuator/health
+        home-page-url: https://${eureka.instance.hostName}:${server.port}/
+        port: ${server.port}
 debug: false
+#<><><><><><><><><><><><><><> SWAGGER <><><><><><><><><><><><><><>
+swagger:
+    base-package: 'com.prx.mercury.controller'
+    api-info:
+        title: 'PRX Mercury'
+        description: 'Servicio para mensajeria de correo electronico y aplicaciones de mensajes instantaneos'
+        contact:
+            name: 'Luis Antonio Mata'
+            url: 'www.prx.test'
+            email: 'luis.antonio.mata@gmail.com'
 #<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
 security:
     discovery:
