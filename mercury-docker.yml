@@ -1,0 +1,101 @@
+app:
+    name: '@pom.artifactId@'
+    version: '@pom.artifactId@'
+spring:
+    application:
+        name: '@pom.artifactId@'
+    jmx:
+        default-domain: mercury
+    mail:
+        host: smtp.gmail.com #TODO Must be change with Dynamic value
+        port: 587 #TODO Must be change with Dynamic value
+        username: usuario #TODO Must be change with Dynamic value
+        password: clave1 #TODO Must be change with Dynamic value
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+                        required: true
+                    ssl:
+                        enable: true
+                test-conection: true
+#<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
+server:
+    port: 8083
+    http2:
+        enabled: true
+    ssl:
+        enabled: true
+        #    client-auth: NEED
+        key-store: prx_backbone_rest.jks
+        key-store-password: prx-backbone-rest
+        key-store-type: JKS
+        key-alias: prx-backbone-rest
+#<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
+postgres:
+    service:
+        url: localhost
+#<><><><><><><><><><><><><><> HTTPS PARA SERVICE DISCOVERY <><><><><><><><><><><><><><>
+eureka:
+    instance:
+        hostname: 172.18.0.3
+        secure-port: 8763
+    client:
+        service-url:
+            defaultZone: ${EUREKA_URI:https://${eureka.instance.hostname}:${eureka.instance.secure-port}/eureka}
+        url: 172.18.0.3:8763
+debug: false
+#<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
+security:
+    discovery:
+        client:
+            name: prx-backbone-rest
+            trust-store-file: prx_backbone_rest_discovery.jks
+            trust-store-password: prx-backbone-rest
+            max-total-connections: 10
+            max-connections-per-host: 10
+#<><><><><><><><><><><><><><> KEYCLOAK <><><><><><><><><><><><><><>
+keycloak:
+    enabled: true
+    realm: prx-access-validator
+    auth-server-url: https://localhost:8993/auth/
+    ssl-required: external
+    resource: prx-services
+    bearer-only: true
+    public-client: true
+    confidential-port: 0
+    disable-trust-manager: true
+    security-constraints:
+        - authRoles:
+              - rservice-rest
+        - securityCollections:
+              - patterns: '/user/*'
+              - name: prx-services
+camel:
+    springboot:
+        main-run-controller: true
+    # Token ID del Bot utilizado
+    #<><><><><><><><><><><><><><> TELEGRAM CLIENT <><><><><><><><><><><><><><>
+    component:
+        telegram:
+            authorization-token: 433569136:AAEUJ9MvARl3fFrNP01ltZx10UTj73Qu5Js
+telegram:
+    url: https://api.telegram.org/bot${telegram.token_id}/sendMessage
+    token_id: 433569136:AAEUJ9MvARl3fFrNP01ltZx10UTj73Qu5Js
+    channel:
+        id: -1001449945963 #TODO Must be change with Dynamic value
+    parser-mode: HTML
+codekey :
+    message:
+        INF_001 : '[${spring.profiles.active}] Acceso autorizado'
+        INF_002 : '[${spring.profiles.active}] Acción completada'
+        INF_003 : '[${spring.profiles.active}] Usuario ya se encuentra con una sesion activa'
+        INF_004 : '[${spring.profiles.active}] Sesion de usuario terminada'
+        INF_005 : '[${spring.profiles.active}] Comando sin programar'
+        WAR_001 : '[${spring.profiles.active}] Acceso NO autorizado'
+        WAR_002 : '[${spring.profiles.active}] Usuario no existe'
+        WAR_003 : '[${spring.profiles.active}] Comando vacio'
+        WAR_004 : '[${spring.profiles.active}] Comando NO valido'
+        WAR_005 : '[${spring.profiles.active}] Usuario NO esta activo'
