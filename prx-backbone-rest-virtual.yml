@@ -132,6 +132,7 @@ api-info:
         name: 'Luis Antonio Mata'
         url: 'www.prx.test'
         email: 'luis.antonio.mata@gmail.com'
+    version: ${}
 springfox:
     documentation:
         swagger:

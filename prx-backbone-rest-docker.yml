@@ -63,7 +63,7 @@ spring:
 #<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
 postgres:
     service:
-        url: localhost
+        url: prx.test
         name: postgres
         database: prxdb
         username: usr_genweb
