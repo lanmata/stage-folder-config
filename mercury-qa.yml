@@ -9,8 +9,8 @@ spring:
     mail:
         host: smtp.gmail.com #TODO Must be change with Dynamic value
         port: 587 #TODO Must be change with Dynamic value
-        username: usuario #TODO Must be change with Dynamic value
-        password: clave1 #TODO Must be change with Dynamic value
+        username: prx.innova@gmail.com #TODO Must be change with Dynamic value
+        password: rmfaezoocslqwkpb #TODO Must be change with Dynamic value
         default-encoding: UTF-8
         protocol: smtp
         properties:
