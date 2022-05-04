@@ -1,9 +1,9 @@
 app:
     name: mercury
-    version: '@pom.artifactId@'
+    version: 1.0.1.20220503-01
 spring:
     application:
-        name: '@pom.artifactId@'
+        name: ${app.name}
     jmx:
         default-domain: mercury
     mail:
