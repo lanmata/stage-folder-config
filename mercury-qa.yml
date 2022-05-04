@@ -11,6 +11,8 @@ spring:
         port: 587 #TODO Must be change with Dynamic value
         username: usuario #TODO Must be change with Dynamic value
         password: clave1 #TODO Must be change with Dynamic value
+        default-encoding: UTF-8
+        protocol: smtp
         properties:
             mail:
                 smtp:
@@ -20,7 +22,10 @@ spring:
                         required: true
                     ssl:
                         enable: true
-                test-conection: true
+        test-connection: true
+    freemarker:
+        template-loader-path: classpath:/templates
+        suffix: .ftlh
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
     port: 8083
