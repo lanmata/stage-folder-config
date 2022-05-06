@@ -1,0 +1,100 @@
+app:
+    name: '@pom.artifactId@'
+    version: '@pom.artifactId@'
+spring:
+    application:
+        name: '@pom.artifactId@'
+    jmx:
+        default-domain: mercury
+    mail:
+        #TODO Must be change with Dynamic value
+        host: smtp.gmail.com
+        #TODO Must be change with Dynamic value
+        port: 587
+        #TODO Must be change with Dynamic value
+        username: usuario
+        #TODO Must be change with Dynamic value
+        password: clave1
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+                        required: true
+                    ssl:
+                        enable: true
+                test-conection: true
+server:
+    #<><><><><><><><><><><><><><> SSL <><><><><><><><><><><><><><>
+    http2:
+        enabled: true
+    ssl:
+        enabled: true
+        key-store: messenger.jks
+        key-store-password: prxmessenger
+        key-alias: messenger
+    output:
+        ansi:
+            enabled: DETECT
+    data:
+        rest:
+            base-path: /api
+    level:
+        root: INFO
+        org:
+            hibernate: DEBUG
+        com:
+            prx: INFO
+#<><><><><><><><><><><><><><> EUREKA <><><><><><><><><><><><><><>
+eureka:
+    client:
+        healtcheck: true
+        enabled: true
+    instance:
+        secure-port: ${eureka.instance.secure-port}
+        non-secure-port-enabled: false
+        secure-port-enabled: true
+        preferIpAddress: true
+        status-page-url-path: https://${eureka.instance.hostname}:${eureka.instance.secure-port}/info
+        health-check-url: https://${eureka.instance.hostname}:${eureka.instance.secure-port}/health
+        home-page-url: https://${eureka.instance.hostname}:${eureka.instance.secure-port}/
+#<><><><><><><><><><><><><><> OPENFEIGN <><><><><><><><><><><><><><>
+feign:
+    client:
+        default-to-properties: false
+        config:
+            default:
+                connectTimeout: 5000
+                readTimeout: 5000
+                loggerLevel: basic
+#<><><><><><><><><><><><><><> APP MESSAGE <><><><><><><><><><><><><><>
+codekey :
+    message:
+        INF_001 : '[${spring.profiles.active}] Acceso autorizado'
+        INF_002 : '[${spring.profiles.active}] Acción completada'
+        INF_003 : '[${spring.profiles.active}] Usuario ya se encuentra con una sesion activa'
+        INF_004 : '[${spring.profiles.active}] Sesion de usuario terminada'
+        INF_005 : '[${spring.profiles.active}] Comando sin programar'
+        WAR_001 : '[${spring.profiles.active}] Acceso NO autorizado'
+        WAR_002 : '[${spring.profiles.active}] Usuario no existe'
+        WAR_003 : '[${spring.profiles.active}] Comando vacio'
+        WAR_004 : '[${spring.profiles.active}] Comando NO valido'
+        WAR_005 : '[${spring.profiles.active}] Usuario NO esta activo'
+telegram:
+    url: https://api.telegram.org/bot${telegram.token_id}/sendMessage
+    #TODO Must be change with Dynamic value
+    token_id: 433569136:AAEUJ9MvARl3fFrNP01ltZx10UTj73Qu5Js
+    #TODO Must be change with Dynamic value
+    channel:
+        id: -1001449945963
+    parser-mode: HTML
+#<><><><><><><><><><><><><><> CAMEL  <><><><><><><><><><><><><><>
+camel:
+    springboot:
+        main-run-controller: true
+    # Token ID del Bot utilizado
+    #<><><><><><><><><><><><><><> TELEGRAM CLIENT <><><><><><><><><><><><><><>
+    component:
+        telegram:
+            authorization-token: ${telegram.token_id}
