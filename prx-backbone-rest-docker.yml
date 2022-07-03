@@ -120,6 +120,10 @@ springfox:
                 use-model-v3: true
         swagger-ui:
             base-url: /
+#<><><><><><><><><><><><><><> LOGGING <><><><><><><><><><><><><><>
+logging:
+    trace:
+        enabled: true
 #<><><><><><><><><><><><><><> MENSAJES DEL SERVICIO <><><><><><><><><><><><><><>
 messages:
     user:
