@@ -2,6 +2,9 @@
 app:
     name: prx-backbone-rest
     version: 1.0.1.20200713-01
+    environments:
+        contact:
+            limit: 5
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
     port: 8084
