@@ -44,7 +44,7 @@ spring:
             enabled: DETECT
 #<><><><><><><><><><><><><><> JMX <><><><><><><><><><><><><><>
     jmx:
-        default-domain: prx-backoffice-rest
+        default-domain: ${JMX_DEFAULT_DOMAIN}
     data:
         rest:
             base-path: /api
