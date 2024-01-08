@@ -87,7 +87,7 @@ eureka:
         status-page-url-path: ${EUREKA_STATUS_PAGE_URL_PATH}
     client:
         healthcheck: true
-        port: 8763
+        port: ${EUREKA_PORT}
         url: ${EUREKA_URL}
         register-with-eureka: true
         fetch-registry: true
