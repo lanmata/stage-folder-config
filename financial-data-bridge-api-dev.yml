@@ -5,8 +5,8 @@ app:
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
     port: 8187
-        http2:
-            enabled: true
+    http2:
+        enabled: true
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
     application:
