@@ -4,9 +4,9 @@ app:
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
     port: 8183
-        ssl:
-            enabled: true
-            bundle: config-server
+    ssl:
+        enabled: true
+        bundle: config-server
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
     application:
