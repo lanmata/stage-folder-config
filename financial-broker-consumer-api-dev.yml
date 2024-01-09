@@ -1,0 +1,159 @@
+app:
+    name: fbc-api
+        version: 0.0.1-12-2023
+#<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
+server:
+    port: 8183
+        ssl:
+            enabled: true
+            bundle: config-server
+#<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
+spring:
+    application:
+        name: ${app.name}
+        description: Financial Broker Consumer API
+    main:
+        allow-bean-definition-overriding: true
+        banner-mode: console
+    server:
+        port: ${server.port}
+        ssl:
+            enabled: true
+            bundle: config-server
+#<><><><><><><><><><><><><><> SSL <><><><><><><><><><><><><><>
+    ssl:
+        bundle:
+            jks:
+                config-server:
+                    key:
+                        alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
+                    keystore:
+                        location: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION}
+                        password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD}
+                        type: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_TYPE}
+#<><><><><><><><><><><><><><> MONGO DB <><><><><><><><><><><><><><>
+    data:
+        mongodb:
+            uuidRepresentation: STANDARD
+            host: ${MONGO_HOST}
+            port: ${MONGO_PORT}
+            database: ${MONGO_DATABASE}
+            username: ${MONGO_USERNAME}
+            password: ${MONGO_PASSWORD}
+            uri: mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}?retryWrites=true&w=majority
+#<><><><><><><><><><><><><><> CLOUD <><><><><><><><><><><><><><>
+    cloud:
+        inetutils:
+            ignoredInterfaces:
+                - docker
+                - eth.*
+                - lo
+            preferredNetworks:
+                - 172.18.0
+        output:
+            ansi:
+                enabled: DETECT
+#<><><><><><><><><><><><><><> JMX <><><><><><><><><><><><><><>
+    jmx:
+        default-domain: ${JMX_DEFAULT_DOMAIN}
+        data:
+            rest:
+                base-path: /api
+#<><><><><><><><><><><><><><> CACHING <><><><><><><><><><><><><><>
+cache:
+    infinispan:
+        config: classpath:infinispan.xml
+    instrument:
+        id: ${CACHE_INSTRUMENT_ID}
+        expiration: 300
+        time-unit: SECONDS
+        maximum-size: 1000
+        initial-capacity: 1000
+        eviction: LRU
+        eviction-strategy: LIRS
+        eviction-max-entry-size: 1000
+        eviction-max-entries: 1000
+        eviction-thread-pool-size: 10
+        eviction-thread-pool-priority: 5
+        eviction-wake-up-interval: 1000
+        eviction-wake-up-interval-time-unit: MILLISECONDS
+        eviction-max-thread-runs: 1000
+        eviction-max-size: 1000
+        eviction-min-size: 1000
+        eviction-min-time-to-live: 1000
+        eviction-max-time-to-live: 1000
+        eviction-lifo: true
+        eviction-async: true
+        eviction-async-pool-size: 10
+        eviction-async-pool-priority: 5
+        eviction-async-wake-up-interval: 1000
+        eviction-async-wake-up-interval-time-unit: MILLISECONDS
+        eviction-async-max-thread-runs: 1000
+        eviction-async-min-size: 1000
+        eviction-async-min-time-to-live: 1000
+        eviction-async-max-time-to-live: 1000
+        eviction-async-lifo: true
+        eviction-async-store: true
+        eviction-async-store-thread-pool-size: 10
+        eviction-async-store-thread-pool-priority: 5
+        eviction-async-store-wake-up-interval: 1000
+        eviction-async-store-wake-up-interval-time-unit: MILLISECONDS
+        eviction-async-store-max-thread-runs: 1000
+        eviction-async-store-min-size: 1000
+        eviction-async-store-min-time-to-live: 1000
+        eviction-async-store-max-time-to-live: 1000
+        eviction-async-store-lifo: true
+        eviction-async-store-timeout: 1000
+        eviction-async-store-timeout-time-unit: MILLISECONDS
+        eviction-async-store-queue-size: 1000
+        eviction-async-store-flush-lock-timeout: 1000
+#<><><><><><><><><><><><><><> KAFKA <><><><><><><><><><><><><><>
+kafka:
+    server:
+        url: ${KAFKA_INSTRUMENT_SERVER}
+    consumer:
+        instrument:
+            topic: ${CONSUMER_INSTRUMENT_TOPIC_ID}
+    cache:
+        instrument:
+            id: ${CACHE_INSTRUMENT_ID}
+#<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
+eureka:
+    instance:
+        home-page-url: ${EUREKA_HOME_PAGE_URL_PATH}
+        preferIpAddress: true
+        prefer-ip-address: true
+        hostName: ${EUREKA_HOSTNAME}
+        lease-renewal-interval-in-seconds: 10
+        lease-expiration-duration-in-seconds: 30
+        health-check-url: ${EUREKA_HEALTH_CHECK_URL_PATH}
+        status-page-url-path: ${EUREKA_STATUS_PAGE_URL_PATH}
+    client:
+        healthcheck: true
+        port: ${EUREKA_PORT}
+        url: ${EUREKA_URL}
+        register-with-eureka: true
+        fetch-registry: true
+        enabled: true
+        service-url:
+            defaultZone: ${EUREKA_DEFAULT_ZONE}
+#<><><><><><><><><><><><><><> OPEN API <><><><><><><><><><><><><><>
+swagger:
+    base-package: 'com.prx.financial.v1'
+    api-info:
+        title: ${app.name}
+        description: ${app.description}
+    contact:
+        name: 'Luis Antonio Mata'
+        url: 'www.prx.test'
+        email: 'luis.antonio.mata@gmail.com'
+        version: ${app.version}
+springfox:
+    documentation:
+        swagger:
+            enable: true
+            v2:
+                use-model-v3: true
+        swagger-ui:
+            base-url: /
+
