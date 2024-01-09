@@ -10,8 +10,8 @@ server:
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
     application:
-    name: ${app.name}
-    description: Financial Data Bridge API
+        name: ${app.name}
+        description: Financial Data Bridge API
     main:
         allow-bean-definition-overriding: true
         banner-mode: console
