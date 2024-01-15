@@ -9,6 +9,8 @@ server:
         enabled: true
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
+    config:
+        import: optional:vault://PRX/FDB-API/DEV
     profiles:
         active: git, vault
     application:
