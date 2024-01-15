@@ -9,6 +9,8 @@ server:
         enabled: true
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
+    profiles:
+        active: git, vault
     application:
         name: ${app.name}
         description: Financial Data Bridge API
