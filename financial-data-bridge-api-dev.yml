@@ -42,7 +42,7 @@ spring:
             preferredNetworks:
                 - 172.18.0
         vault:
-            enabled: false
+            enabled: true
             host: vault.qa.prx.test
             port: 8200
             scheme: http
@@ -50,7 +50,7 @@ spring:
             fail-fast: false
             read-timeout: 15000
             config:
-                order: -10
+                order: 1
             uri: http://${spring.cloud.vault.host}:${spring.cloud.vault.port}
             authentication: token
             token: hvs.ElyHsLEnP8LV7d45sDnvy5et
