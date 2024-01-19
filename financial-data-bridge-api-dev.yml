@@ -11,8 +11,6 @@ server:
 spring:
     config:
         import: optional:vault://PRX/FDB-API/DEV
-    profiles:
-        active: git, vault
     application:
         name: ${app.name}
         description: Financial Data Bridge API
