@@ -41,6 +41,14 @@ spring:
                 - lo
             preferredNetworks:
                 - 172.18.0
+        vault:
+            enabled: true
+            host: vault.qa.prx.test
+            port: 8200
+            backend: PRX
+            uri: http://${spring.cloud.vault.host}:${spring.cloud.vault.port}
+            authentication: token
+default-context: PRX/FDB-API/dev
     output:
         ansi:
             enabled: DETECT
