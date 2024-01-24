@@ -9,8 +9,6 @@ server:
         enabled: true
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
-    config:
-        import: optional:vault://PRX/FDB-API/DEV
     application:
         name: ${app.name}
         description: Financial Data Bridge API
@@ -27,11 +25,11 @@ spring:
             jks:
                 config-server:
                     key:
-                        alias: prx.env-qa-docker
+                        alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
                     keystore:
-                        location: classpath:prx.env-qa-docker.p12
-                        password: 13515030
-                        type: PKCS12
+                        location: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION}
+                        password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD}
+                        type: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_TYPE}
 #<><><><><><><><><><><><><><> CLOUD <><><><><><><><><><><><><><>
     cloud:
         inetutils:
@@ -41,14 +39,6 @@ spring:
                 - lo
             preferredNetworks:
                 - 172.18.0
-    vault:
-        enabled: true
-        host: vault.qa.prx.test
-        port: 8200
-        backend: PRX
-        uri: http://${spring.cloud.vault.host}:${spring.cloud.vault.port}
-        authentication: token
-        default-context: PRX/FDB-API/dev
     output:
         ansi:
             enabled: DETECT
