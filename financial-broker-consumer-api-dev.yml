@@ -1,12 +1,11 @@
 app:
-    name: fbc-api
+    name: financial-broker-consumer-api
     version: 0.0.1-12-2023
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
     port: 8183
     ssl:
         enabled: true
-        bundle: config-server
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
     application:
@@ -16,7 +15,6 @@ spring:
         allow-bean-definition-overriding: true
         banner-mode: console
     server:
-        port: ${server.port}
         ssl:
             enabled: true
             bundle: config-server
