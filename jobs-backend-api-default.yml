@@ -28,6 +28,12 @@ spring:
     context:
       failure:
         threshold: 10000000
+#<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
+  datasource:
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
+    driver-class-name: org.postgresql.Driver
   #<><><><><><><><><><><><><><> SSL <><><><><><><><><><><><><><>
   ssl:
     bundle:
