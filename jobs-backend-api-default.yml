@@ -94,7 +94,7 @@ eureka:
     url: ${EUREKA_URL}
     register-with-eureka: true
     fetch-registry: true
-    enabled: true
+    enabled: false
 
 swagger:
   base-package: 'com.prx.jobs.backend.v1'
