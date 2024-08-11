@@ -115,6 +115,7 @@ api-info:
     email: 'luis.antonio.mata@gmail.com'
   version: ${app.version}
 springdoc:
+  swagger-ui-path: /swagger-ui.html
   api-docs:
     path: /api-docs
 
