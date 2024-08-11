@@ -38,7 +38,7 @@ spring:
     hikari:
       connectionTimeout: 30000
       maxLifetime: 1800000
-      poolName: SpringBootJPAHikariCP-FinancialDataBridge
+      poolName: SpringBootJPAHikariCP-JobsBackend
       idleTimeout: 30000
       minimumIdle: 1
       maximumPoolSize: 5
