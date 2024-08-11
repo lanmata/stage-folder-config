@@ -114,12 +114,7 @@ api-info:
     url: 'www.prx.test'
     email: 'luis.antonio.mata@gmail.com'
   version: ${app.version}
-springfox:
-  documentation:
-    swagger:
-      enable: true
-      v2:
-        use-model-v3: true
-    swagger-ui:
-      base-url: /
+springdoc:
+  api-docs:
+    path: /api-docs
 
