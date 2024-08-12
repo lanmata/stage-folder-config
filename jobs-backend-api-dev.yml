@@ -74,40 +74,19 @@ spring:
         log-level: error
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
-    instance:
-        home-page-url: ${EUREKA_HOME_PAGE_URL_PATH}
-        preferIpAddress: true
-        prefer-ip-address: true
-        hostName: ${EUREKA_HOSTNAME}
-        lease-renewal-interval-in-seconds: 10
-        lease-expiration-duration-in-seconds: 30
-        health-check-url: ${EUREKA_HEALTH_CHECK_URL_PATH}
-        status-page-url-path: ${EUREKA_STATUS_PAGE_URL_PATH}
-    client:
-        healthcheck: true
-        port: ${EUREKA_PORT}
-        url: ${EUREKA_URL}
-        register-with-eureka: true
-        fetch-registry: true
-        enabled: true
-        service-url:
-            defaultZone: ${EUREKA_DEFAULT_ZONE}
-#<><><><><><><><><><><><><><> OPEN API <><><><><><><><><><><><><><>
-swagger:
-    base-package: 'com.prx.jobs.backend.v1'
-api-info:
-    title: ${app.name}
-    description: ${app.description}
-    contact:
-        name: 'Luis Antonio Mata'
-        url: 'www.prx.test'
-        email: 'luis.antonio.mata@gmail.com'
-    version: ${app.version}
-springfox:
-    documentation:
-        swagger:
-            enable: true
-            v2:
-                use-model-v3: true
-        swagger-ui:
-            base-url: /
+  instance:
+    home-page-url: ${EUREKA_HOME_PAGE_URL_PATH}
+    preferIpAddress: true
+    prefer-ip-address: true
+    hostName: ${EUREKA_HOSTNAME}
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+    health-check-url: ${EUREKA_HEALTH_CHECK_URL_PATH}
+    status-page-url-path: ${EUREKA_STATUS_PAGE_URL_PATH}
+  client:
+    healthcheck: true
+    port: ${EUREKA_PORT}
+    url: ${EUREKA_URL}
+    register-with-eureka: true
+    fetch-registry: true
+    enabled: false
