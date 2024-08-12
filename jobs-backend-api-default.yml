@@ -103,19 +103,3 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     enabled: false
-
-swagger:
-  base-package: 'com.prx.jobs.backend.v1'
-api-info:
-  title: ${app.name}
-  description: ${app.description}
-  contact:
-    name: 'Luis Antonio Mata'
-    url: 'www.prx.test'
-    email: 'luis.antonio.mata@gmail.com'
-  version: ${app.version}
-springdoc:
-  swagger-ui-path: /swagger-ui.html
-  api-docs:
-    path: /api-docs
-
