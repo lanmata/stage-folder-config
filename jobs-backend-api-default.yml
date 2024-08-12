@@ -102,4 +102,4 @@ eureka:
     url: ${EUREKA_URL}
     register-with-eureka: true
     fetch-registry: true
-    enabled: false
+    enabled: true
