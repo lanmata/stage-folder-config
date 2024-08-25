@@ -120,9 +120,19 @@ springdoc:
       paths-to-match: ${app.api.endpoint}/**/**
     - group: companies
       paths-to-match: ${app.api.endpoint}/companies/**
+    - group: job-offers
+      paths-to-match: ${app.api.endpoint}/job-offers/**
     - group: modes
       paths-to-match: ${app.api.endpoint}/modes/**
     - group: reports
       paths-to-match: ${app.api.endpoint}/reports/**
-    - group: job-offers
-      paths-to-match: ${app.api.endpoint}/job-offers/**
+    - group: position
+      paths-to-match: ${app.api.endpoint}/positions/**
+    - group: sources
+      paths-to-match: ${app.api.endpoint}/sources/**
+    - group: source-types
+      paths-to-match: ${app.api.endpoint}/source-types/**
+    - group: status
+      paths-to-match: ${app.api.endpoint}/status/**
+    - group: terms
+      paths-to-match: ${app.api.endpoint}/terms/**
