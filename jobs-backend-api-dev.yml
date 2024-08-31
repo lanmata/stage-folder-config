@@ -105,6 +105,8 @@ springdoc:
     use-root-path: true
   show-actuator: true
   group-configs:
+    - group: All
+      paths-to-match: ${app.api.endpoint}/**/**
     - group: Companies
       paths-to-match: ${app.api.endpoint}/companies/**
     - group: Job-offers
