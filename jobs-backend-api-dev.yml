@@ -105,23 +105,21 @@ springdoc:
     use-root-path: true
   show-actuator: true
   group-configs:
-    - group: all
-      paths-to-match: ${app.api.endpoint}/**/**
-    - group: companies
+    - group: Companies
       paths-to-match: ${app.api.endpoint}/companies/**
-    - group: job-offers
+    - group: Job-offers
       paths-to-match: ${app.api.endpoint}/job-offers/**
-    - group: modes
+    - group: Modes
       paths-to-match: ${app.api.endpoint}/modes/**
-    - group: reports
+    - group: Reports
       paths-to-match: ${app.api.endpoint}/reports/**
-    - group: position
+    - group: Position
       paths-to-match: ${app.api.endpoint}/positions/**
-    - group: sources
+    - group: Sources
       paths-to-match: ${app.api.endpoint}/sources/**
-    - group: source-types
+    - group: Source-types
       paths-to-match: ${app.api.endpoint}/source-types/**
-    - group: status
+    - group: Status
       paths-to-match: ${app.api.endpoint}/status/**
-    - group: terms
+    - group: Terms
       paths-to-match: ${app.api.endpoint}/terms/**
