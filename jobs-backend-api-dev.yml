@@ -3,7 +3,7 @@ app:
   name: jobs-backend-api
   version: 0.0.1-01-2024
   api:
-    endpoint: /v1
+    endpoint: /api/v1
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
     port: 8191
