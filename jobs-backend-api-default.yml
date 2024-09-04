@@ -6,18 +6,19 @@ app:
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
   port: 8183
+  http2:
+    enabled: true
   ssl:
     enabled: true
     bundle: config-server
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
-
 spring:
-  cloud:
-    vault:
-      enabled: false
   application:
     name: ${app.name}
     description: Jobs Backend API
+  cloud:
+    vault:
+      enabled: false
   main:
     allow-bean-definition-overriding: true
     banner-mode: console
@@ -26,17 +27,13 @@ spring:
     ssl:
       enabled: true
       bundle: config-server
-  test:
-    context:
-      failure:
-        threshold: 10000000
-#<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
+  #<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
   datasource:
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
     url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
     driver-class-name: org.postgresql.Driver
-#<><><><><><><><><><><><><><> CONNECTION POOL <><><><><><><><><><><><><><>
+    #<><><><><><><><><><><><><><> CONNECTION POOL <><><><><><><><><><><><><><>
     hikari:
       connectionTimeout: 30000
       maxLifetime: 1800000
@@ -44,6 +41,20 @@ spring:
       idleTimeout: 30000
       minimumIdle: 1
       maximumPoolSize: 5
+  #<><><><><><><><><><><><><><> PERSISTENCE <><><><><><><><><><><><><><>
+  jpa:
+    hibernate.ddl-auto: none
+    show-sql: true
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      jdbc:
+        lob.non_contextual_creation: true
+    log-level: error
+  test:
+    context:
+      failure:
+        threshold: 10000000
   #<><><><><><><><><><><><><><> SSL <><><><><><><><><><><><><><>
   ssl:
     bundle:
@@ -72,21 +83,9 @@ cloud:
   #<><><><><><><><><><><><><><> JMX <><><><><><><><><><><><><><>
   jmx:
     default-domain: ${JMX_DEFAULT_DOMAIN}
-    data:
-      rest:
-        base-path: /api
-  # The Spring Cloud Config specific configurations
-  #<><><><><><><><><><><><><><> VAULT <><><><><><><><><><><><><><>
-  vault:
-    token: ${VAULT_TOKEN}
-    uri: ${VAULT_SERVER_URL}
-    kv:
-      backend: PRX
-      default-context: ${app.name}
-    application-name: ${app.name}
-  bootstrap:
-    # Enables the Spring Cloud Bootstrap application context
-    enabled: ${SPRING_BOOT_CLOUD_BOOTSTRAP_ENABLED}
+  data:
+    rest:
+      base-path: /api
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
   instance:

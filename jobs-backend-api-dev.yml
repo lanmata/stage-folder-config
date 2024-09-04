@@ -1,4 +1,3 @@
-#IMPORTANT: This is the latest version
 app:
   name: jobs-backend-api
   version: 0.0.1-01-2024
@@ -6,74 +5,81 @@ app:
     endpoint: /jobs-backend/api/v1
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
-    port: 8191
-    http2:
-        enabled: true
+  port: 8191
+  http2:
+    enabled: true
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
-    application:
-        name: ${app.name}
-        description: Jobs Backend API
-    main:
-        allow-bean-definition-overriding: true
-        banner-mode: console
-    server:
-        ssl:
-            enabled: true
-            bundle: config-server
-#<><><><><><><><><><><><><><> SSL <><><><><><><><><><><><><><>
+  application:
+    name: ${app.name}
+    description: Jobs Backend API
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: console
+  server:
+    port: ${server.port}
     ssl:
-        bundle:
-            jks:
-                config-server:
-                    key:
-                        alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
-                    keystore:
-                        location: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION}
-                        password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD}
-                        type: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_TYPE}
+      enabled: true
+      bundle: config-server
+  #<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
+  datasource:
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
+    driver-class-name: org.postgresql.Driver
+    #<><><><><><><><><><><><><><> CONNECTION POOL <><><><><><><><><><><><><><>
+    hikari:
+      connectionTimeout: 30000
+      maxLifetime: 1800000
+      poolName: SpringBootJPAHikariCP-JobsBackend
+      idleTimeout: 30000
+      minimumIdle: 1
+      maximumPoolSize: 5
+  #<><><><><><><><><><><><><><> PERSISTENCE <><><><><><><><><><><><><><>
+  jpa:
+    hibernate.ddl-auto: none
+    show-sql: false
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      jdbc:
+        lob.non_contextual_creation: true
+    log-level: error
+  test:
+    context:
+      failure:
+        threshold: 10000000
+  #<><><><><><><><><><><><><><> SSL <><><><><><><><><><><><><><>
+  ssl:
+    bundle:
+      jks:
+        config-server:
+          key:
+            alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
+          keystore:
+            location: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION}
+            password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD}
+            type: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_TYPE}
 #<><><><><><><><><><><><><><> CLOUD <><><><><><><><><><><><><><>
-    cloud:
-        inetutils:
-            ignoredInterfaces:
-                - docker
-                - eth.*
-                - lo
-            preferredNetworks:
-                - 172.18.0
-    output:
-        ansi:
-            enabled: DETECT
-#<><><><><><><><><><><><><><> JMX <><><><><><><><><><><><><><>
-    jmx:
-        default-domain: ${JMX_DEFAULT_DOMAIN}
-    data:
-        rest:
-            base-path: /api
-#<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
-    datasource:
-        username: ${POSTGRES_USERNAME}
-        password: ${POSTGRES_PASSWORD}
-        url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
-        driver-class-name: org.postgresql.Driver
-#<><><><><><><><><><><><><><> CONNECTION POOL <><><><><><><><><><><><><><>
-        hikari:
-            connectionTimeout: 30000
-            maxLifetime: 1800000
-            poolName: SpringBootJPAHikariCP-FinancialDataBridge
-            idleTimeout: 30000
-            minimumIdle: 1
-            maximumPoolSize: 5
-#<><><><><><><><><><><><><><> PERSISTENCE <><><><><><><><><><><><><><>
-    jpa:
-        hibernate.ddl-auto: none
-        show-sql: false
-        database: POSTGRESQL
-        database-platform: org.hibernate.dialect.PostgreSQLDialect
-        properties:
-            jdbc:
-                lob.non_contextual_creation: true
-        log-level: error
+cloud:
+  discovery:
+    enabled: true
+  inetutils:
+    ignoredInterfaces:
+      - docker
+      - eth.*
+      - lo
+    preferredNetworks:
+      - 172.18.0
+  output:
+    ansi:
+      enabled: DETECT
+  #<><><><><><><><><><><><><><> JMX <><><><><><><><><><><><><><>
+  jmx:
+    default-domain: ${JMX_DEFAULT_DOMAIN}
+  data:
+    rest:
+      base-path: /api
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
   instance:
