@@ -27,6 +27,30 @@ spring:
     ssl:
       enabled: true
       bundle: config-server
+  #<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
+  datasource:
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
+    driver-class-name: org.postgresql.Driver
+    #<><><><><><><><><><><><><><> CONNECTION POOL <><><><><><><><><><><><><><>
+    hikari:
+      connectionTimeout: 30000
+      maxLifetime: 1800000
+      poolName: SpringBootJPAHikariCP-JobsBackend
+      idleTimeout: 30000
+      minimumIdle: 1
+      maximumPoolSize: 5
+  #<><><><><><><><><><><><><><> PERSISTENCE <><><><><><><><><><><><><><>
+  jpa:
+    hibernate.ddl-auto: none
+    show-sql: false
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      jdbc:
+        lob.non_contextual_creation: true
+    log-level: error
   test:
     context:
       failure:
@@ -62,30 +86,6 @@ cloud:
   data:
     rest:
       base-path: /api
-  #<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
-  datasource:
-    username: ${POSTGRES_USERNAME}
-    password: ${POSTGRES_PASSWORD}
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
-    driver-class-name: org.postgresql.Driver
-    #<><><><><><><><><><><><><><> CONNECTION POOL <><><><><><><><><><><><><><>
-    hikari:
-      connectionTimeout: 30000
-      maxLifetime: 1800000
-      poolName: SpringBootJPAHikariCP-JobsBackend
-      idleTimeout: 30000
-      minimumIdle: 1
-      maximumPoolSize: 5
-  #<><><><><><><><><><><><><><> PERSISTENCE <><><><><><><><><><><><><><>
-  jpa:
-    hibernate.ddl-auto: none
-    show-sql: false
-    database: POSTGRESQL
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    properties:
-      jdbc:
-        lob.non_contextual_creation: true
-    log-level: error
   # The Spring Cloud Config specific configurations
   #<><><><><><><><><><><><><><> VAULT <><><><><><><><><><><><><><>
   vault:
