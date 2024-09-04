@@ -8,6 +8,9 @@ server:
   port: 8183
   http2:
     enabled: true
+  ssl:
+    enabled: true
+    bundle: config-server
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
   application:
