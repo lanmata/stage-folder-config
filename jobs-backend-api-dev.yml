@@ -80,18 +80,6 @@ cloud:
   data:
     rest:
       base-path: /api
-  # The Spring Cloud Config specific configurations
-  #<><><><><><><><><><><><><><> VAULT <><><><><><><><><><><><><><>
-  vault:
-    token: ${VAULT_TOKEN}
-    uri: ${VAULT_SERVER_URL}
-    kv:
-      backend: PRX
-      default-context: ${app.name}
-    application-name: ${app.name}
-  bootstrap:
-    # Enables the Spring Cloud Bootstrap application context
-    enabled: ${SPRING_BOOT_CLOUD_BOOTSTRAP_ENABLED}
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
   instance:
