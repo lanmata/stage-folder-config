@@ -104,6 +104,12 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     enabled: false
+#<><><><><><><><><><><><><><> JWT Configuration <><><><><><><><><><><><><><>
+jwt:
+  auth:
+    converter:
+      resource-id: jobs-offer-ui-client
+      principal-attribute: jobs-offer-frontend-client
 #<><><><><><><><><><><><><><> OPEN API DOC <><><><><><><><><><><><><><>
 springdoc:
   version: ${app.version}
