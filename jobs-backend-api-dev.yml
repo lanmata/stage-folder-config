@@ -20,7 +20,7 @@ spring:
     port: ${server.port}
     ssl:
       enabled: true
-      bundle: prx-qa
+      bundle: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
   #<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
   datasource:
     username: ${POSTGRES_USERNAME}
