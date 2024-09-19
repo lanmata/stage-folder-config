@@ -8,6 +8,9 @@ server:
   port: 8191
   http2:
     enabled: true
+  ssl:
+    enabled: true
+    bundle: prx-qa
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
   application:
