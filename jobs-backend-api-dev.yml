@@ -10,7 +10,7 @@ server:
     enabled: true
   ssl:
     enabled: true
-    bundle: prx-qa
+    bundle: prx-qa.tst
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
   application:
@@ -23,7 +23,7 @@ spring:
     port: ${server.port}
     ssl:
       enabled: true
-      bundle: prx-qa
+      bundle: prx-qa.config-server.tst
   #<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
   datasource:
     username: ${POSTGRES_USERNAME}
