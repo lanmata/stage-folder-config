@@ -8,9 +8,6 @@ server:
   port: 8191
   http2:
     enabled: true
-  ssl:
-    enabled: true
-    bundle: prx-qa
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
   application:
@@ -23,7 +20,7 @@ spring:
     port: ${server.port}
     ssl:
       enabled: true
-      bundle: prx-qa
+      bundle: jobs-offer-security
   #<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
   datasource:
     username: ${POSTGRES_USERNAME}
@@ -56,9 +53,9 @@ spring:
   ssl:
     bundle:
       jks:
-        config-server:
+        jobs-offer-security:
           key:
-            alias: prx-qa
+            alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
           keystore:
             location: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION}
             password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD}
@@ -101,12 +98,6 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     enabled: false
-#<><><><><><><><><><><><><><> JWT Configuration <><><><><><><><><><><><><><>
-jwt:
-  auth:
-    converter:
-      resource-id: jobs-offer-ui-client
-      principal-attribute: jobs-offer-frontend-client
 #<><><><><><><><><><><><><><> OPEN API DOC <><><><><><><><><><><><><><>
 springdoc:
   version: ${app.version}
