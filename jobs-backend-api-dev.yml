@@ -55,7 +55,7 @@ spring:
       jks:
         config-server:
           key:
-            alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
+            alias: prx-qa
           keystore:
             location: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION}
             password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD}
