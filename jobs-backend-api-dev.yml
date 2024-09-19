@@ -10,7 +10,7 @@ server:
     enabled: true
   ssl:
     enabled: true
-    bundle: prx-qa.tst
+    bundle: prx-qa
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
 spring:
   application:
@@ -23,7 +23,7 @@ spring:
     port: ${server.port}
     ssl:
       enabled: true
-      bundle: prx-qa.config-server.tst
+      bundle: prx-qa
   #<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
   datasource:
     username: ${POSTGRES_USERNAME}
@@ -101,6 +101,12 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     enabled: false
+#<><><><><><><><><><><><><><> JWT Configuration <><><><><><><><><><><><><><>
+jwt:
+  auth:
+    converter:
+      resource-id: jobs-offer-ui-client
+      principal-attribute: jobs-offer-frontend-client
 #<><><><><><><><><><><><><><> OPEN API DOC <><><><><><><><><><><><><><>
 springdoc:
   version: ${app.version}
