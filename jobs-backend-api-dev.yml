@@ -23,9 +23,9 @@ spring:
       bundle: jobs-offer-security
   #<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
   datasource:
-    username: ${POSTGRES_USERNAME}
-    password: ${POSTGRES_PASSWORD}
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
+    username: ${JOB_OFFERS_DB_USERNAME}
+    password: ${JOB_OFFERS_DB_PASSWORD}
+    url: jdbc:postgresql://${JOB_OFFERS_DB_URI}:${JOB_OFFERS_DB_PORT}/${JOB_OFFERS_DB_NAME}
     driver-class-name: org.postgresql.Driver
     #<><><><><><><><><><><><><><> CONNECTION POOL <><><><><><><><><><><><><><>
     hikari:
@@ -57,9 +57,13 @@ spring:
           key:
             alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
           keystore:
-            location: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION}
-            password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD}
-            type: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_TYPE}
+            location: ${SSL_JKS_KEYSTORE_TYPE}
+            password: ${SSL_JKS_KEYSTORE_LOCATION}
+            type: ${SSL_JKS_KEYSTORE_PASSWORD}
+          trust-store:
+            location: ${SSL_JKS_CONFIG_SERVER_TRUSTSTORE_LOCATION}
+            password: ${SSL_JKS_CONFIG_SERVER_TRUSTSTORE_PASSWORD}
+            type: ${SSL_JKS_CONFIG_SERVER_TRUSTSTORE_TYPE}
 #<><><><><><><><><><><><><><> CLOUD <><><><><><><><><><><><><><>
 cloud:
   discovery:
@@ -83,21 +87,21 @@ cloud:
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
   instance:
-    home-page-url: ${EUREKA_HOME_PAGE_URL_PATH}
+    home-page-url: ${SRMN_HOME_PAGE_URL_PATH}
     preferIpAddress: true
     prefer-ip-address: true
-    hostName: ${EUREKA_HOSTNAME}
+    host-name: ${SRMN_HOSTNAME}
     lease-renewal-interval-in-seconds: 10
     lease-expiration-duration-in-seconds: 30
-    health-check-url: ${EUREKA_HEALTH_CHECK_URL_PATH}
-    status-page-url-path: ${EUREKA_STATUS_PAGE_URL_PATH}
+    health-check-url: ${SRMN_HEALTH_CHECK_URL_PATH}
+    status-page-url-path: ${SRMN_STATUS_PAGE_URL_PATH}
   client:
     healthcheck: true
-    port: ${EUREKA_PORT}
-    url: ${EUREKA_URL}
+    port: ${SRMN_PORT}
+    url: ${SRMN_HOSTNAME}
     register-with-eureka: true
     fetch-registry: true
-    enabled: false
+    enabled: true
 #<><><><><><><><><><><><><><> OPEN API DOC <><><><><><><><><><><><><><>
 springdoc:
   version: ${app.version}

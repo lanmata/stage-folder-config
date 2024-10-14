@@ -29,9 +29,9 @@ spring:
       bundle: config-server
   #<><><><><><><><><><><><><><> DATABASES <><><><><><><><><><><><><><>
   datasource:
-    username: ${POSTGRES_USERNAME}
-    password: ${POSTGRES_PASSWORD}
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}
+    username: ${JOB_OFFERS_DB_USERNAME}
+    password: ${JOB_OFFERS_DB_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${JOB_OFFERS_DB_NAME}
     driver-class-name: org.postgresql.Driver
     #<><><><><><><><><><><><><><> CONNECTION POOL <><><><><><><><><><><><><><>
     hikari:
@@ -59,13 +59,16 @@ spring:
   ssl:
     bundle:
       jks:
-        config-server:
-          key:
-            alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
-          keystore:
-            location: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION}
-            password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD}
-            type: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_TYPE}
+        key:
+          alias: ${SSL_JKS_CNFS_KEY_ALIAS}
+        keystore:
+          location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}
+          password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}
+          type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}
+        trust-store:
+          location: ${SSL_JKS_CONFIG_SERVER_TRUSTSTORE_LOCATION}
+          password: ${SSL_JKS_CONFIG_SERVER_TRUSTSTORE_PASSWORD}
+          type: ${SSL_JKS_CONFIG_SERVER_TRUSTSTORE_TYPE}
 #<><><><><><><><><><><><><><> CLOUD <><><><><><><><><><><><><><>
 cloud:
   discovery:
@@ -98,12 +101,21 @@ eureka:
     health-check-url: ${EUREKA_HEALTH_CHECK_URL_PATH}
     status-page-url-path: ${EUREKA_STATUS_PAGE_URL_PATH}
   client:
+    tls:
+      trust-store-type: ${SSL_JKS_SRMN_TRUSTSTORE_TYPE}
+      trust-store-password: ${SSL_JKS_SRMN_TRUSTSTORE_PASSWORD}
+      trust-store: ${SSL_JKS_SRMN_TRUSTSTORE_LOCATION}
+      key-store-type: ${SSL_JKS_SRMN_KEYSTORE_TYPE}
+      key-store-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}
+      key-store: ${SSL_JKS_SRMN_KEYSTORE_LOCATION}
+      key-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}
+      enabled: true
     healthcheck: true
     port: ${EUREKA_PORT}
     url: ${EUREKA_URL}
     register-with-eureka: true
     fetch-registry: true
-    enabled: false
+    enabled: true
 #<><><><><><><><><><><><><><> JWT Configuration <><><><><><><><><><><><><><>
 jwt:
   auth:
