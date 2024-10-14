@@ -92,14 +92,14 @@ cloud:
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
   instance:
-    home-page-url: ${EUREKA_HOME_PAGE_URL_PATH}
+    home-page-url: ${SRMN_HOME_PAGE_URL_PATH}
     preferIpAddress: true
     prefer-ip-address: true
-    hostName: ${EUREKA_HOSTNAME}
+    hostName: ${SRMN_HOSTNAME}
     lease-renewal-interval-in-seconds: 10
     lease-expiration-duration-in-seconds: 30
-    health-check-url: ${EUREKA_HEALTH_CHECK_URL_PATH}
-    status-page-url-path: ${EUREKA_STATUS_PAGE_URL_PATH}
+    health-check-url: ${SRMN_HEALTH_CHECK_URL_PATH}
+    status-page-url-path: ${SRMN_STATUS_PAGE_URL_PATH}
   client:
     tls:
       trust-store-type: ${SSL_JKS_SRMN_TRUSTSTORE_TYPE}
@@ -111,8 +111,8 @@ eureka:
       key-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}
       enabled: true
     healthcheck: true
-    port: ${EUREKA_PORT}
-    url: ${EUREKA_URL}
+    port: ${SRMN_PORT}
+    url: ${SRMN_URL}
     register-with-eureka: true
     fetch-registry: true
     enabled: true

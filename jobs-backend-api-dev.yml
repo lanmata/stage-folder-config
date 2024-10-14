@@ -55,7 +55,7 @@ spring:
       jks:
         jobs-offer-security:
           key:
-            alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
+            alias: ${SSL_JKS_KEY_ALIAS}
           keystore:
             location: ${SSL_JKS_KEYSTORE_TYPE}
             password: ${SSL_JKS_KEYSTORE_LOCATION}
