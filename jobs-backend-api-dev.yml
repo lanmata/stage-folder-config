@@ -57,11 +57,11 @@ spring:
           key:
             alias: ${SSL_JKS_KEY_ALIAS}
           keystore:
-            location: classpath${SSL_KEYSTORE_LOCATION}
+            location: classpath:${SSL_KEYSTORE_LOCATION}
             password: ${SSL_KEYSTORE_PASSWORD}
             type: ${SSL_KEYSTORE_TYPE}
           trust-store:
-            location: ${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}
+            location: classpath:${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}
             password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}
             type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}
 #<><><><><><><><><><><><><><> CLOUD <><><><><><><><><><><><><><>
