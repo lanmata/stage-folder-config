@@ -97,23 +97,23 @@ eureka:
       key-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}
       enabled: true
     # Port for the Eureka server
-    eurekaServerPort: ${SD_PORT}
+    eurekaServerPort: ${SRMN_PORT}
     # DNS name for the Eureka server
-    eurekaServerDNSName: ${SD_URL}
+    eurekaServerDNSName: ${SRMN_URI}
     # Enables fetching the registry from Eureka
     fetch-registry: true
     # Enables registration with Eureka
-    register-with-eureka: ${SD_REGISTER_ENABLED}
+    register-with-eureka: ${SRMN_REGISTER_ENABLED}
     serviceUrl:
       # Default zone for the Eureka server
-      defaultZone: ${SD_URI}:${SD_PORT}/eureka/
+      defaultZone: ${SRMN_URI}:${SRMN_PORT}/eureka/
   instance:
     # Disables non-secure port
     nonSecurePortEnabled: false
     # Enables secure port
     securePortEnabled: true
     # Hostname for the Eureka instance
-    hostName: ${SD_INSTANCE_HOST_NAME}
+    hostName: ${SRMN_HOSTNAME}
 #<><><><><><><><><><><><><><> OPEN API DOC <><><><><><><><><><><><><><>
 springdoc:
   version: ${app.version}
