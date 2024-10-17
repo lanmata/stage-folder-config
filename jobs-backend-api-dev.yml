@@ -5,7 +5,7 @@ app:
     endpoint: /jobs-backend/api/v1
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
-  port: 8191
+  port: ${JOBS_OFFER_PORT}
   http2:
     enabled: true
 #<><><><><><><><><><><><><><> SPRING <><><><><><><><><><><><><><>
