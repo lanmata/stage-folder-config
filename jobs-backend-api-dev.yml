@@ -1,6 +1,6 @@
 app:
   name: jobs-backend-api
-  version: 0.0.1-01-2024
+  version: 1.0.0
   api:
     endpoint: /jobs-backend/api/v1
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
@@ -55,7 +55,7 @@ spring:
       jks:
         jobs-offer-security:
           key:
-            alias: ${SSL_JKS_KEY_ALIAS}
+            alias: ${SSL_KEY_ALIAS}
           keystore:
             location: classpath:${SSL_KEYSTORE_LOCATION}
             password: ${SSL_KEYSTORE_PASSWORD}
