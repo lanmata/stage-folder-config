@@ -90,10 +90,10 @@ eureka:
     tls:
       trust-store-type: ${SSL_JKS_SRMN_TRUSTSTORE_TYPE}
       trust-store-password: ${SSL_JKS_SRMN_TRUSTSTORE_PASSWORD}
-      trust-store: classpath:${SSL_JKS_SRMN_TRUSTSTORE_LOCATION}
+      trust-store: ${SSL_JKS_SRMN_TRUSTSTORE_LOCATION}
       key-store-type: ${SSL_JKS_SRMN_KEYSTORE_TYPE}
       key-store-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}
-      key-store: classpath:${SSL_JKS_SRMN_KEYSTORE_LOCATION}
+      key-store: ${SSL_JKS_SRMN_KEYSTORE_LOCATION}
       key-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}
       enabled: true
     # Port for the Eureka server
