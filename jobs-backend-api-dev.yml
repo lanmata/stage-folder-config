@@ -112,15 +112,17 @@ cloud:
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
   client:
+    application:
+      name: ${app.name}
+    enabled: on
     tls:
       trust-store-type: ${SSL_JKS_SRMN_TRUSTSTORE_TYPE}
       trust-store-password: ${SSL_JKS_SRMN_TRUSTSTORE_PASSWORD}
-      trust-store: ${SSL_JKS_SRMN_TRUSTSTORE_LOCATION}
+      trust-store: classpath:${SSL_JKS_SRMN_TRUSTSTORE_LOCATION}
       key-store-type: ${SSL_JKS_SRMN_KEYSTORE_TYPE}
       key-store-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}
-      key-store: ${SSL_JKS_SRMN_KEYSTORE_LOCATION}
+      key-store: classpath:${SSL_JKS_SRMN_KEYSTORE_LOCATION}
       key-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}
-      enabled: true
     # Port for the Eureka server
     eurekaServerPort: ${SRMN_PORT}
     # DNS name for the Eureka server
@@ -133,6 +135,9 @@ eureka:
       # Default zone for the Eureka server
       defaultZone: ${SRMN_URI}:${SRMN_PORT}/eureka/
   instance:
+    preferIpAddress: false
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
     # Disables non-secure port
     nonSecurePortEnabled: false
     # Enables secure port
