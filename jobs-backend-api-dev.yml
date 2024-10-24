@@ -141,7 +141,7 @@ eureka:
     fetch-registry: true  # Enable fetching the registry from Eureka
     register-with-eureka: ${SRMN_REGISTER_ENABLED}  # Enable registration with Eureka
     serviceUrl:
-      defaultZone: ${SRMN_URI}:${SRMN_PORT}/eureka/  # Default zone for the Eureka server
+      defaultZone: ${SRMN_URI}/eureka/  # Default zone for the Eureka server
   instance:
     preferIpAddress: false  # Prefer IP address for Eureka instance
     leaseRenewalIntervalInSeconds: 10  # Lease renewal interval for Eureka instance
