@@ -1,3 +1,28 @@
+prx:
+  auth:
+    converter:
+      resource-id: ${AUTH_CLIENT_ID}
+      principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}
+  security:
+    keystore:
+      location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}
+      type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}
+      password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}
+    truststore:
+      location: ${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}
+      type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}
+      password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}
+    management-authenticator:
+      enabled: true
+      keystore:
+        location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}
+        type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}
+        password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}
+      truststore:
+        location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}
+        type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}
+        password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}
+
 app:
   name: jobs-backend-api
   version: 1.0.0
