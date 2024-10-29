@@ -1,7 +1,10 @@
-#IMPORTANT: This is the latest version
+# IMPORTANT: This is the latest version
 app:
     name: prx-backbone-rest
     version: 1.0.1.20200713-01
+    environments:
+        contact:
+            limit: 5
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
     port: 8084
@@ -50,17 +53,17 @@ spring:
             poolName: SpringBootJPAHikariCPbackbone
             maxLifetime: 1800000
             connectionTimeout: 30000
-    #<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
+#<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
     jpa:
         hibernate.ddl-auto: none
         show-sql: false
-        open-in-view: false
         database: POSTGRESQL
-        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
         properties:
-            hibernate:
-                jdbc:
-                    lob.non_contextual_creation: true
+          hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+            jdbc:
+              lob.non_contextual_creation: true
         log-level: error
 #<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
 postgres:

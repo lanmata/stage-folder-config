@@ -1,6 +1,10 @@
+# IMPORTANT: This is the latest version
 app:
     name: prx-backbone-rest
     version: 1.0.1.20200713-01
+    environments:
+        contact:
+            limit: 5
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
     port: 8084
@@ -49,21 +53,22 @@ spring:
             poolName: SpringBootJPAHikariCPbackbone
             maxLifetime: 1800000
             connectionTimeout: 30000
-    #<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
+#<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
     jpa:
         hibernate.ddl-auto: none
         show-sql: false
         database: POSTGRESQL
-        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
         properties:
-            hibernate:
-                jdbc:
-                    lob.non_contextual_creation: true
+          hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+            jdbc:
+              lob.non_contextual_creation: true
         log-level: error
 #<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
 postgres:
     service:
-        url: postgresql
+        url: qa.prx.test
         name: postgres
         database: PRX
         username: usr_genweb
@@ -71,7 +76,7 @@ postgres:
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
     client:
-        url: service-monitor
+        url: qa.prx.test
         port: 8763
         register-with-eureka: true
         enable: true
@@ -80,7 +85,7 @@ eureka:
             defaultZone: https://${eureka.client.url}:${eureka.client.port}/eureka/
     instance:
         leaseRenewalIntervalInSeconds: 30
-        hostName: service-monitor
+        hostName: qa.prx.test
         preferIpAddress: true
         status-page-url-path: https://${eureka.instance.hostName}:${server.port}/actuator/info
         health-check-url: https://${eureka.instance.hostName}:${server.port}/actuator/health
@@ -89,7 +94,7 @@ eureka:
 debug: false
 #<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
 security:
-#    - basicAuth: ["lmata:123456"]  # <-- use the same name here
+    #    - basicAuth: ["lmata:123456"]  # <-- use the same name here
     discovery:
         client:
             name: prx-backbone-rest
@@ -123,13 +128,14 @@ keycloak:
 #<><><><><><><><><><><><><><> SWAGGER <><><><><><><><><><><><><><>
 swagger:
     base-package: 'com.prx.backoffice.controller'
-    api-info:
-        title: 'PRX Backbone REST'
-        description: 'Servicios para la gestion de las entidades del sistema'
-        contact:
-            name: 'Luis Antonio Mata'
-            url: 'www.prx.test'
-            email: 'luis.antonio.mata@gmail.com'
+api-info:
+    title: 'PRX Backbone REST'
+    description: 'Servicios para la gestion de las entidades del sistema'
+    contact:
+        name: 'Luis Antonio Mata'
+        url: 'www.qa.prx.test'
+        email: 'luis.antonio.mata@gmail.com'
+    version: ${}
 springfox:
     documentation:
         swagger:

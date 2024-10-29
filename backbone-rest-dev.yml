@@ -2,17 +2,14 @@
 app:
     name: prx-backbone-rest
     version: 1.0.1.20200713-01
+    environments:
+        contact:
+            limit: 5
 #<><><><><><><><><><><><><><> HTTPS <><><><><><><><><><><><><><>
 server:
     port: 8084
     http2:
         enabled: true
-    ssl:
-        enabled: true
-        key-store: prx_backbone_rest.jks
-        key-store-password: prx-backbone-rest
-        key-store-type: JKS
-        key-alias: prx-backbone-rest
 spring:
     main:
         allow-bean-definition-overriding: true
@@ -50,55 +47,42 @@ spring:
             poolName: SpringBootJPAHikariCPbackbone
             maxLifetime: 1800000
             connectionTimeout: 30000
-    #<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
+#<><><><><><><><><><><><><><> PERSISTENCIA <><><><><><><><><><><><><><>
     jpa:
         hibernate.ddl-auto: none
         show-sql: false
-        open-in-view: false
         database: POSTGRESQL
-        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
         properties:
-            hibernate:
-                jdbc:
-                    lob.non_contextual_creation: true
+          hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+            jdbc:
+              lob.non_contextual_creation: true
         log-level: error
 #<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
 postgres:
     service:
-        url: localhost
+        url: postgresql
         name: postgres
         database: PRX
         username: usr_genweb
         password: UsU075qjjgCtdWxS3rxgjwCoCmWjdQ1FrhBYapZs
 #<><><><><><><><><><><><><><> SERVICE DISCOVERY <><><><><><><><><><><><><><>
 eureka:
-    client:
-        url: localhost
-        port: 8763
-        register-with-eureka: true
-        enable: true
-        healtcheck: true
-        serviceUrl:
-            defaultZone: https://${eureka.client.url}:${eureka.client.port}/eureka/
-    instance:
-        leaseRenewalIntervalInSeconds: 30
-        hostName: prx.test
-        preferIpAddress: true
-        status-page-url-path: https://${eureka.instance.hostName}:${server.port}/actuator/info
-        health-check-url: https://${eureka.instance.hostName}:${server.port}/actuator/health
-        home-page-url: https://${eureka.instance.hostName}:${server.port}/
-        port: ${server.port}
+  client:
+    eurekaServerDNSName: qa.prx.test/service-monitor
+    eurekaServerPort: 8763
+    registerWithEureka: true
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: https://${eureka.client.eurekaServerDNSName}/eureka
+  instance:
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    hostName: service-monitor
 debug: false
-#<><><><><><><><><><><><><><> HTPS <><><><><><><><><><><><><><>
-security:
-#    - basicAuth: ["lmata:123456"]  # <-- use the same name here
-    discovery:
-        client:
-            name: prx-backbone-rest
-            trust-store-file: prx_backbone_rest_discovery.jks
-            trust-store-password: prx-backbone-rest
-            max-total-connections: 10
-            max-connections-per-host: 10
+#<><><><><><><><><><><><><><> SECURITY <><><><><><><><><><><><><><>s
 components:
     securitySchemes:
         basicAuth:     # <-- arbitrary name for the security scheme
@@ -108,7 +92,7 @@ components:
 keycloak:
     enabled: true
     realm: prx-access-validator
-    auth-server-url: https://prx.test/auth/
+    auth-server-url: https://qa.prx.test/auth/
     ssl-required: external
     resource: prx-services
     bearer-only: true
