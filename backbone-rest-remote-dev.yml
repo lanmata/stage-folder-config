@@ -4,6 +4,9 @@ prx:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
       principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
+  logging:
+    trace:
+      enabled: ${LOGGING_TRACE_ENABLE} # Enable trace logging
 # Application-specific settings
 app:
   api:
