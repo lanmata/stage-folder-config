@@ -38,7 +38,7 @@ spring:
   datasource:
     username: ${GENERAL_DB_USERNAME}  # Username for the database
     password: ${GENERAL_DB_PASSWORD}  # Password for the database
-    url: jdbc:postgresql://${GENERAL_DB_URI}:${JOB_OFFERS_DB_PORT}/${JOB_OFFERS_DB_NAME}  # JDBC URL for the database
+    url: jdbc:postgresql://${GENERAL_DB_URI}:${GENERAL_DB_PORT}/${GENERAL_DB_NAME}  # JDBC URL for the database
     driver-class-name: org.postgresql.Driver  # Driver class name for PostgreSQL
 
     # Connection pool settings
