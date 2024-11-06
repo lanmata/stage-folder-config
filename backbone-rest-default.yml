@@ -6,8 +6,6 @@ prx:
       principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
 # Application-specific settings
 app:
-  name: prx-backbone-rest
-  version: 1.0.0
   api:
     endpoint: /backbone-rest/api/v1  # API endpoint for the application
   environments:
