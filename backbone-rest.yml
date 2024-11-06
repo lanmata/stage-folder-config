@@ -53,7 +53,7 @@ spring:
         hibernate.ddl-auto: none
         show-sql: false
         database: POSTGRESQL
-        database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
         properties:
             hibernate:
                 jdbc:
