@@ -4,10 +4,11 @@ prx:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
       principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
+  logging:
+    trace:
+      enabled: ${LOGGING_TRACE_ENABLE} # Enable trace logging
 # Application-specific settings
 app:
-  name: prx-backbone-rest
-  version: 1.0.0
   api:
     endpoint: /backbone-rest/api/v1  # API endpoint for the application
   environments:
@@ -55,7 +56,7 @@ spring:
     hibernate.ddl-auto: none
     show-sql: false
     database: POSTGRESQL
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
         jdbc:
@@ -104,14 +105,6 @@ spring:
     rest:
       base-path: /api # Base path for REST data
 
-#<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
-postgres:
-  service:
-    url: postgresql
-    name: postgres
-    database: PRX
-    username: usr_genweb
-    password: UsU075qjjgCtdWxS3rxgjwCoCmWjdQ1FrhBYapZs
 # Eureka service discovery configuration
 eureka:
   client:
