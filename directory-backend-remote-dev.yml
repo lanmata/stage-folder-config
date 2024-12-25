@@ -166,4 +166,4 @@ springdoc:
     - group: All  # Group for all endpoints
       paths-to-match: ${app.api.endpoint}/**/**
     - group: Users  # Group for company-related endpoints
-      paths-to-match: ${app.api.endpoint}/users/**
+      paths-to-match: ${app.api.endpoint}/users
