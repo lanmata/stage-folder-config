@@ -1,0 +1,172 @@
+# Configuration for PRX authentication and security settings
+prx:
+  auth:
+    converter:
+      resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
+      principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
+  directory:
+    role-id: ${INITIAL_ROLE_ID}  # Initial role ID for the directory
+    application-id: ${APPLICATION_ID}  # Initial application ID for the directory
+  security:
+    keystore:
+      location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore
+      type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the keystore
+      password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the keystore
+    truststore:
+      location: ${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
+      type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}  # Type of the truststore
+      password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}  # Password for the truststore
+    management-authenticator:
+      enabled: true  # Enable management authenticator
+      keystore:
+        location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore for management
+        type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the keystore for management
+        password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the keystore for management
+      truststore:
+        location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the truststore for management
+        type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the truststore for management
+        password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the truststore for management
+
+# Application-specific settings
+app:
+  name: directory-backend  # Name of the application
+  version: 0.0.1  # Version of the application
+  api:
+    endpoint: /api/v1  # API endpoint for the application
+
+# Server configuration
+server:
+  port: ${APP_PORT}  # Port for the server
+  http2:
+    enabled: true  # Enable HTTP/2
+
+# Spring framework configuration
+spring:
+  application:
+    name: ${app.name}  # Name of the Spring application
+    description: Directory Backend API  # Description of the Spring application
+  main:
+    allow-bean-definition-overriding: true  # Allow bean definition overriding
+    banner-mode: console  # Set banner mode to console
+  server:
+    port: ${server.port}  # Port for the Spring server
+    ssl:
+      enabled: true  # Enable SSL
+      bundle: jobs-offer-security  # SSL bundle name
+
+  # Database configuration
+  datasource:
+    username: ${DIRECTORY_DB_USERNAME}  # Username for the database
+    password: ${DIRECTORY_DB_PASSWORD}  # Password for the database
+    url: jdbc:postgresql://${DIRECTORY_DB_URI}:${DIRECTORY_DB_PORT}/${DIRECTORY_DB_NAME}  # JDBC URL for the database
+    driver-class-name: org.postgresql.Driver  # Driver class name for PostgreSQL
+
+    # Connection pool settings
+    hikari:
+      connectionTimeout: 30000  # Connection timeout for HikariCP
+      maxLifetime: 1800000  # Maximum lifetime for HikariCP connections
+      poolName: SpringBootJPAHikariCP-JobsBackend  # Pool name for HikariCP
+      idleTimeout: 30000  # Idle timeout for HikariCP
+      minimumIdle: 1  # Minimum idle connections for HikariCP
+      maximumPoolSize: 5  # Maximum pool size for HikariCP
+
+  # JPA (Java Persistence API) settings
+  jpa:
+    hibernate.ddl-auto: none  # Hibernate DDL auto setting
+    show-sql: false  # Show SQL statements
+    database: POSTGRESQL  # Database type
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgreSQL
+    properties:
+      jdbc:
+        lob.non_contextual_creation: true  # Non-contextual LOB creation
+    log-level: error  # Log level for JPA
+
+  test:
+    context:
+      failure:
+        threshold: 10000000  # Failure threshold for test context
+
+  # SSL configuration
+  ssl:
+    bundle:
+      jks:
+        jobs-offer-security:
+          key:
+            alias: ${SSL_KEY_ALIAS}  # Alias for the SSL key
+          keystore:
+            location: classpath:${SSL_KEYSTORE_LOCATION}  # Location of the keystore
+            password: ${SSL_KEYSTORE_PASSWORD}  # Password for the keystore
+            type: ${SSL_KEYSTORE_TYPE}  # Type of the keystore
+          trust-store:
+            location: classpath:${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
+            password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}  # Password for the truststore
+            type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}  # Type of the truststore
+
+# Cloud configuration
+cloud:
+  discovery:
+    enabled: true  # Enable cloud discovery
+  inetutils:
+    ignoredInterfaces:
+      - docker  # Ignore docker interfaces
+      - eth.*  # Ignore ethernet interfaces
+      - lo  # Ignore loopback interfaces
+    preferredNetworks:
+      - 172.18.0  # Preferred network range
+  output:
+    ansi:
+      enabled: DETECT  # Enable ANSI output detection
+
+  # JMX (Java Management Extensions) settings
+  jmx:
+    default-domain: ${JMX_DEFAULT_DOMAIN}  # Default domain for JMX
+
+  data:
+    rest:
+      base-path: /api  # Base path for REST data
+
+# Eureka service discovery configuration
+eureka:
+  client:
+    application:
+      name: ${app.name}  # Name of the Eureka client application
+    enabled: on  # Enable Eureka client
+    tls:
+      trust-store-type: ${SSL_JKS_SRMN_TRUSTSTORE_TYPE}  # Trust store type for TLS
+      trust-store-password: ${SSL_JKS_SRMN_TRUSTSTORE_PASSWORD}  # Trust store password for TLS
+      trust-store: classpath:${SSL_JKS_SRMN_TRUSTSTORE_LOCATION}  # Trust store location for TLS
+      key-store-type: ${SSL_JKS_SRMN_KEYSTORE_TYPE}  # Key store type for TLS
+      key-store-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}  # Key store password for TLS
+      key-store: classpath:${SSL_JKS_SRMN_KEYSTORE_LOCATION}  # Key store location for TLS
+      key-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}  # Key password for TLS
+    eurekaServerPort: ${SRMN_PORT}  # Port for the Eureka server
+    eurekaServerDNSName: ${SRMN_URI}  # DNS name for the Eureka server
+    fetch-registry: true  # Enable fetching the registry from Eureka
+    register-with-eureka: ${SRMN_REGISTER_ENABLED}  # Enable registration with Eureka
+    serviceUrl:
+      defaultZone: ${SRMN_DEFAULT_ZONE}  # Default zone for the Eureka server
+  instance:
+    preferIpAddress: false  # Prefer IP address for Eureka instance
+    leaseRenewalIntervalInSeconds: 10  # Lease renewal interval for Eureka instance
+    leaseExpirationDurationInSeconds: 30  # Lease expiration duration for Eureka instance
+    nonSecurePortEnabled: false  # Disable non-secure port
+    securePortEnabled: true  # Enable secure port
+    hostName: ${SRMN_HOSTNAME}  # Hostname for the Eureka instance
+
+# Open API documentation configuration
+springdoc:
+  version: ${app.version}  # Version of the Open API documentation
+  api-docs:
+    version: openapi_3_1  # Version of the Open API specification
+  swagger-ui:
+    display-request-duration: true  # Display request duration in Swagger UI
+    groups-order: DESC  # Order groups in descending order
+    operationsSorter: method  # Sort operations by method
+    disable-swagger-default-url: true  # Disable default Swagger URL
+    use-root-path: true  # Use root path for Swagger UI
+  show-actuator: true  # Show actuator endpoints in Swagger UI
+  group-configs:
+    - group: All  # Group for all endpoints
+      paths-to-match: ${app.api.endpoint}/**/**
+    - group: Users  # Group for company-related endpoints
+      paths-to-match: ${app.api.endpoint}/users
