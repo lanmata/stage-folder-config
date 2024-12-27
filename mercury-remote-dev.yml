@@ -4,9 +4,6 @@ prx:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
       principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
-  directory:
-    role-id: ${INITIAL_ROLE_ID}  # Initial role ID for the directory
-    application-id: ${APPLICATION_ID}  # Initial application ID for the directory
   security:
     keystore:
       location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore
@@ -29,10 +26,10 @@ prx:
 
 # Application-specific settings
 app:
-  name: directory-backend  # Name of the application
-  version: 0.0.1  # Version of the application
+  name: mercury
+  version: 0.0.1
   api:
-    endpoint: /api/v1  # API endpoint for the application
+    endpoint: /api/v1
 
 # Server configuration
 server:
@@ -44,7 +41,7 @@ server:
 spring:
   application:
     name: ${app.name}  # Name of the Spring application
-    description: Directory Backend API  # Description of the Spring application
+    description: Mercury API  # Description of the Spring application
   main:
     allow-bean-definition-overriding: true  # Allow bean definition overriding
     banner-mode: console  # Set banner mode to console
@@ -52,45 +49,34 @@ spring:
     port: ${server.port}  # Port for the Spring server
     ssl:
       enabled: true  # Enable SSL
-      bundle: directory-backend-security  # SSL bundle name
-
-  # Database configuration
-  datasource:
-    username: ${DIRECTORY_DB_USERNAME}  # Username for the database
-    password: ${DIRECTORY_DB_PASSWORD}  # Password for the database
-    url: jdbc:postgresql://${DIRECTORY_DB_URI}:${DIRECTORY_DB_PORT}/${DIRECTORY_DB_NAME}  # JDBC URL for the database
-    driver-class-name: org.postgresql.Driver  # Driver class name for PostgreSQL
-
-    # Connection pool settings
-    hikari:
-      connectionTimeout: 30000  # Connection timeout for HikariCP
-      maxLifetime: 1800000  # Maximum lifetime for HikariCP connections
-      poolName: SpringBootJPAHikariCP-JobsBackend  # Pool name for HikariCP
-      idleTimeout: 30000  # Idle timeout for HikariCP
-      minimumIdle: 1  # Minimum idle connections for HikariCP
-      maximumPoolSize: 5  # Maximum pool size for HikariCP
-
-  # JPA (Java Persistence API) settings
-  jpa:
-    hibernate.ddl-auto: none  # Hibernate DDL auto setting
-    show-sql: false  # Show SQL statements
-    database: POSTGRESQL  # Database type
-    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgreSQL
+      bundle: mercury-security  # SSL bundle name
+  mail:
+    host: ${MAIL_HOST} #TODO Must be change with Dynamic value
+    port: ${MAIL_PORT} #TODO Must be change with Dynamic value
+    username: ${MAIL_USERNAME} #TODO Must be change with Dynamic value
+    password: ${MAIL_PASSWORD} #TODO Must be change with Dynamic value
+    default-encoding: ${MAIL_PROPERTIES_DEFAULT_ENCODING}
+    protocol: ${MAIL_PROTOCOL}
     properties:
-      jdbc:
-        lob.non_contextual_creation: true  # Non-contextual LOB creation
-    log-level: error  # Log level for JPA
-
-  test:
-    context:
-      failure:
-        threshold: 10000000  # Failure threshold for test context
+      mail:
+        timeout: ${MAIL_PROPERTIES_TIMEOUT}
+        smtp:
+          auth: ${MAIL_PROPERTIES_SMTP_AUTH}
+          starttls:
+            enable: ${MAIL_PROPERTIES_STARTTLS_ENABLED}
+            required: ${MAIL_PROPERTIES_STARTTLS_REQUIRED}
+          ssl:
+            enable: ${MAIL_PROPERTIES_SSL_ENABLED}
+    test-connection: ${MAIL_PROPERTIES_TEST_CONNECTION}
+  freemarker:
+    template-loader-path: ${TEMPLATE_PATH}
+    suffix: ${TEMPLATE_SUFFIX}
 
   # SSL configuration
   ssl:
     bundle:
       jks:
-        directory-backend-security:
+        mercury-security:
           key:
             alias: ${SSL_KEY_ALIAS}  # Alias for the SSL key
           keystore:
@@ -123,7 +109,7 @@ cloud:
 
   data:
     rest:
-      base-path: /api  # Base path for REST data
+      base-path: /api/v1  # Base path for REST data
 
 # Eureka service discovery configuration
 eureka:
@@ -169,4 +155,28 @@ springdoc:
     - group: All  # Group for all endpoints
       paths-to-match: ${app.api.endpoint}/**/**
     - group: Users  # Group for company-related endpoints
-      paths-to-match: ${app.api.endpoint}/users
+      paths-to-match: ${app.api.endpoint}/mail
+
+camel:
+  springboot:
+    main-run-controller: ${CAMEL_MAIN_RUN_CONTROLLER}
+  # Token ID del Bot utilizado
+  #<><><><><><><><><><><><><><> TELEGRAM CLIENT <><><><><><><><><><><><><><>
+  component:
+    telegram:
+      authorization-token: ${TELEGRAM_TOKEN_ID}
+telegram:
+  url: https://api.telegram.org/bot${TELEGRAM_TOKEN_ID}/sendMessage
+  parser-mode: ${TELEGRAM_PARSE_MODE}
+codekey:
+  message:
+    INF_001: '[${spring.profiles.active}] Acceso autorizado'
+    INF_002: '[${spring.profiles.active}] Acción completada'
+    INF_003: '[${spring.profiles.active}] Usuario ya se encuentra con una sesion activa'
+    INF_004: '[${spring.profiles.active}] Sesion de usuario terminada'
+    INF_005: '[${spring.profiles.active}] Comando sin programar'
+    WAR_001: '[${spring.profiles.active}] Acceso NO autorizado'
+    WAR_002: '[${spring.profiles.active}] Usuario no existe'
+    WAR_003: '[${spring.profiles.active}] Comando vacio'
+    WAR_004: '[${spring.profiles.active}] Comando NO valido'
+    WAR_005: '[${spring.profiles.active}] Usuario NO esta activo'
