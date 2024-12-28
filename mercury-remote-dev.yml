@@ -46,8 +46,8 @@ spring:
     allow-bean-definition-overriding: true  # Allow bean definition overriding
     banner-mode: console  # Set banner mode to console
   server:
-    port: ${server.port}  # Port for the Spring server
-     ssl:
+    port: ${APP_PORT}  # Port for the Spring server
+    ssl:
       enabled: true  # Enable SSL
       bundle: mercury-security  # SSL bundle name
   mail:
