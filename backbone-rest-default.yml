@@ -4,25 +4,6 @@ prx:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
       principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
-  security:
-    keystore:
-      location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore
-      type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the keystore
-      password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the keystore
-    truststore:
-      location: ${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
-      type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}  # Type of the truststore
-      password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}  # Password for the truststore
-    management-authenticator:
-      enabled: true  # Enable management authenticator
-      keystore:
-        location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore for management
-        type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the keystore for management
-        password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the keystore for management
-      truststore:
-        location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the truststore for management
-        type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the truststore for management
-        password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the truststore for management
   logging:
     trace:
       enabled: ${LOGGING_TRACE_ENABLE} # Enable trace logging
@@ -124,6 +105,14 @@ spring:
     rest:
       base-path: /api # Base path for REST data
 
+#<><><><><><><><><><><><><><> HTTPS PARA BASE DE DATOS <><><><><><><><><><><><><><>
+postgres:
+  service:
+    url: postgresql
+    name: postgres
+    database: PRX
+    username: usr_genweb
+    password: UsU075qjjgCtdWxS3rxgjwCoCmWjdQ1FrhBYapZs
 # Eureka service discovery configuration
 eureka:
   client:
