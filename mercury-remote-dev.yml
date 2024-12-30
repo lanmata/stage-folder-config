@@ -46,7 +46,7 @@ spring:
     allow-bean-definition-overriding: true  # Allow bean definition overriding
     banner-mode: console  # Set banner mode to console
   server:
-    port: ${server.port}  # Port for the Spring server
+    port: ${APP_PORT}  # Port for the Spring server
     ssl:
       enabled: true  # Enable SSL
       bundle: mercury-security  # SSL bundle name
@@ -80,11 +80,11 @@ spring:
           key:
             alias: ${SSL_KEY_ALIAS}  # Alias for the SSL key
           keystore:
-            location: classpath:${SSL_KEYSTORE_LOCATION}  # Location of the keystore
+            location: ${SSL_KEYSTORE_LOCATION}  # Location of the keystore
             password: ${SSL_KEYSTORE_PASSWORD}  # Password for the keystore
             type: ${SSL_KEYSTORE_TYPE}  # Type of the keystore
           trust-store:
-            location: classpath:${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
+            location: ${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
             password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}  # Password for the truststore
             type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}  # Type of the truststore
 
@@ -114,6 +114,10 @@ cloud:
 # Eureka service discovery configuration
 eureka:
   client:
+    jersey:
+      enabled: false
+    restclient:
+      enabled: false
     application:
       name: ${app.name}  # Name of the Eureka client application
     enabled: on  # Enable Eureka client
