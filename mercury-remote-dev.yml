@@ -80,11 +80,11 @@ spring:
           key:
             alias: ${SSL_KEY_ALIAS}  # Alias for the SSL key
           keystore:
-            location: ${SSL_KEYSTORE_LOCATION}  # Location of the keystore
+            location: classpath:${SSL_KEYSTORE_LOCATION}  # Location of the keystore
             password: ${SSL_KEYSTORE_PASSWORD}  # Password for the keystore
             type: ${SSL_KEYSTORE_TYPE}  # Type of the keystore
           trust-store:
-            location: ${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
+            location: classpath:${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
             password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}  # Password for the truststore
             type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}  # Type of the truststore
 
