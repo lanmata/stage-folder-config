@@ -127,6 +127,10 @@ spring:
 # Eureka service discovery configuration
 eureka:
   client:
+    jersey:
+      enabled: false
+    restclient:
+      enabled: false
     application:
       name: ${app.name}  # Name of the Eureka client application
     enabled: on  # Enable Eureka client
