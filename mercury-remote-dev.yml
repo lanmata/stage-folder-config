@@ -114,6 +114,8 @@ cloud:
 # Eureka service discovery configuration
 eureka:
   client:
+    jersey:
+      enabled: false
     restclient:
       enabled: false
     application:
