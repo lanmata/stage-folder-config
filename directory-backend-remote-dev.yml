@@ -31,7 +31,11 @@ prx:
 app:
   name: directory-backend  # Name of the application
   version: 0.0.1  # Version of the application
+
   api:
+    excludes: none
+    exclude:
+      methods: ${EXCLUDE_METHODS}
     endpoint: /api/v1  # API endpoint for the application
 
 # Server configuration
@@ -123,7 +127,7 @@ cloud:
 
   data:
     rest:
-      base-path: /api  # Base path for REST data
+      base-path: /api/v1  # Base path for REST data
 
 # Eureka service discovery configuration
 eureka:
