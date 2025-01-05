@@ -32,6 +32,9 @@ app:
   name: directory-backend  # Name of the application
   version: 0.0.1  # Version of the application
   api:
+    excludes: none
+    exclude:
+      methods: ${EXCLUDE_METHODS}
     endpoint: /api/v1  # API endpoint for the application
 
 # Server configuration
