@@ -50,6 +50,33 @@ spring:
     ssl:
       enabled: true  # Enable SSL
       bundle: mercury-security  # SSL bundle name
+  # Database configuration
+  datasource:
+    username: ${DIRECTORY_DB_USERNAME}  # Username for the database
+    password: ${DIRECTORY_DB_PASSWORD}  # Password for the database
+    url: jdbc:postgresql://${DIRECTORY_DB_URI}:${DIRECTORY_DB_PORT}/${DIRECTORY_DB_NAME}  # JDBC URL for the database
+    driver-class-name: org.postgresql.Driver  # Driver class name for PostgreSQL
+
+    # Connection pool settings
+    hikari:
+      connectionTimeout: 30000  # Connection timeout for HikariCP
+      maxLifetime: 1800000  # Maximum lifetime for HikariCP connections
+      poolName: SpringBootJPAHikariCP-DirectoryBackend  # Pool name for HikariCP
+      idleTimeout: 30000  # Idle timeout for HikariCP
+      minimumIdle: 1  # Minimum idle connections for HikariCP
+      maximumPoolSize: 5  # Maximum pool size for HikariCP
+
+  # JPA (Java Persistence API) settings
+  jpa:
+    hibernate.ddl-auto: none  # Hibernate DDL auto setting
+    show-sql: false  # Show SQL statements
+    database: POSTGRESQL  # Database type
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgreSQL
+    properties:
+      jdbc:
+        lob.non_contextual_creation: true  # Non-contextual LOB creation
+    log-level: error  # Log level for JPA
+
   mail:
     host: ${MAIL_HOST} #TODO Must be change with Dynamic value
     port: ${MAIL_PORT} #TODO Must be change with Dynamic value
