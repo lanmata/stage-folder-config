@@ -1,5 +1,11 @@
 # Configuration for PRX authentication and security settings
 prx:
+  bootstrap:
+    server:
+      url: ${BOOTSTRAP_SERVER_URI}
+  consumer:
+    mercury:
+      topic: ${MERCURY_EMAIL_TOPIC}
   auth:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
@@ -52,10 +58,10 @@ spring:
       bundle: mercury-security  # SSL bundle name
   # Database configuration
   datasource:
-    username: ${DIRECTORY_DB_USERNAME}  # Username for the database
-    password: ${DIRECTORY_DB_PASSWORD}  # Password for the database
-    url: jdbc:postgresql://${DIRECTORY_DB_URI}:${DIRECTORY_DB_PORT}/${DIRECTORY_DB_NAME}  # JDBC URL for the database
-    driver-class-name: org.postgresql.Driver  # Driver class name for PostgreSQL
+    username: ${MERCURY_DB_USERNAME}  # Username for the database
+    password: ${MERCURY_DB_PASSWORD}  # Password for the database
+    url: jdbc:postgresql://${MERCURY_DB_URI}:${MERCURY_DB_PORT}/${MERCURY_DB_NAME}  # JDBC URL for the database
+    driver-class-name: org.postgresql.Driver  # Driver class name for PostgresSQL
 
     # Connection pool settings
     hikari:
