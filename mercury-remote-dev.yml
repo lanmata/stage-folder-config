@@ -77,12 +77,22 @@ spring:
     hibernate.ddl-auto: none  # Hibernate DDL auto setting
     show-sql: false  # Show SQL statements
     database: POSTGRESQL  # Database type
-    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgreSQL
+    database-platform: org.hibernate.dialect.PostgresSQLDialect  # Hibernate dialect for PostgresSQL
     properties:
       jdbc:
         lob.non_contextual_creation: true  # Non-contextual LOB creation
     log-level: error  # Log level for JPA
-
+#<><><><><><><><><><><><><><> MONGO DB <><><><><><><><><><><><><><>
+  data:
+    mongodb:
+      uuidRepresentation: STANDARD
+      host: ${MONGO_HOST}
+      port: ${MONGO_PORT}
+      database: ${MONGO_DATABASE}
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
+      uri: mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}?retryWrites=true&w=majority
+  #<><><><><><><><><><><><><><> EMAIL <><><><><><><><><><><><><><>
   mail:
     host: ${MAIL_HOST} #TODO Must be change with Dynamic value
     port: ${MAIL_PORT} #TODO Must be change with Dynamic value
