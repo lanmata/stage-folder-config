@@ -77,7 +77,7 @@ spring:
     hibernate.ddl-auto: none  # Hibernate DDL auto setting
     show-sql: false  # Show SQL statements
     database: POSTGRESQL  # Database type
-    database-platform: org.hibernate.dialect.PostgresSQLDialect  # Hibernate dialect for PostgresSQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgresSQL
     properties:
       jdbc:
         lob.non_contextual_creation: true  # Non-contextual LOB creation
@@ -215,6 +215,55 @@ camel:
 telegram:
   url: https://api.telegram.org/bot${TELEGRAM_TOKEN_ID}/sendMessage
   parser-mode: ${TELEGRAM_PARSE_MODE}
+
+cache:
+  infinispan:
+    config: classpath:infinispan.xml
+  emails-messages:
+    id: ${CACHE_EMAIL_MESSAGE_ID}
+    expiration: 300
+    time-unit: SECONDS
+    maximum-size: 1000
+    initial-capacity: 1000
+    eviction: LRU
+    eviction-strategy: LIRS
+    eviction-max-entry-size: 1000
+    eviction-max-entries: 1000
+    eviction-thread-pool-size: 10
+    eviction-thread-pool-priority: 5
+    eviction-wake-up-interval: 1000
+    eviction-wake-up-interval-time-unit: MILLISECONDS
+    eviction-max-thread-runs: 1000
+    eviction-max-size: 1000
+    eviction-min-size: 1000
+    eviction-min-time-to-live: 1000
+    eviction-max-time-to-live: 1000
+    eviction-lifo: true
+    eviction-async: true
+    eviction-async-pool-size: 10
+    eviction-async-pool-priority: 5
+    eviction-async-wake-up-interval: 1000
+    eviction-async-wake-up-interval-time-unit: MILLISECONDS
+    eviction-async-max-thread-runs: 1000
+    eviction-async-min-size: 1000
+    eviction-async-min-time-to-live: 1000
+    eviction-async-max-time-to-live: 1000
+    eviction-async-lifo: true
+    eviction-async-store: true
+    eviction-async-store-thread-pool-size: 10
+    eviction-async-store-thread-pool-priority: 5
+    eviction-async-store-wake-up-interval: 1000
+    eviction-async-store-wake-up-interval-time-unit: MILLISECONDS
+    eviction-async-store-max-thread-runs: 1000
+    eviction-async-store-min-size: 1000
+    eviction-async-store-min-time-to-live: 1000
+    eviction-async-store-max-time-to-live: 1000
+    eviction-async-store-lifo: true
+    eviction-async-store-timeout: 1000
+    eviction-async-store-timeout-time-unit: MILLISECONDS
+    eviction-async-store-queue-size: 1000
+    eviction-async-store-flush-lock-timeout: 1000
+
 codekey:
   message:
     INF_001: '[${spring.profiles.active}] Acceso autorizado'
