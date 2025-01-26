@@ -77,7 +77,7 @@ spring:
     hibernate.ddl-auto: none  # Hibernate DDL auto setting
     show-sql: false  # Show SQL statements
     database: POSTGRESQL  # Database type
-    database-platform: org.hibernate.dialect.PostgresSQLDialect  # Hibernate dialect for PostgreSQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgreSQL
     properties:
       jdbc:
         lob.non_contextual_creation: true  # Non-contextual LOB creation
