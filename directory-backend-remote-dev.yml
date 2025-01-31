@@ -1,5 +1,15 @@
 # Configuration for PRX authentication and security settings
 prx:
+  verification:
+    code:
+      template:
+        id: ${PRX_VERIFICATION_CODE_TEMPLATE_ID}  # Verification code template ID
+  bootstrap:
+    server:
+      url: ${BOOTSTRAP_SERVER_URI} # URL for the bootstrap server
+  producer:
+    mercury:
+      topic: ${MERCURY_EMAIL_TOPIC}
   auth:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
