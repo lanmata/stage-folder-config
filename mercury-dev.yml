@@ -1,5 +1,15 @@
 # Configuration for PRX authentication and security settings
 prx:
+  verification:
+    code:
+      template:
+        id: ${PRX_VERIFICATION_CODE_TEMPLATE_ID}  # Verification code template ID
+  bootstrap:
+    server:
+      url: ${BOOTSTRAP_SERVER_URI}
+  consumer:
+    mercury:
+      topic: ${MERCURY_EMAIL_TOPIC}
   auth:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
@@ -50,11 +60,48 @@ spring:
     ssl:
       enabled: true  # Enable SSL
       bundle: mercury-security  # SSL bundle name
+  # Database configuration
+  datasource:
+    username: ${MERCURY_DB_USERNAME}  # Username for the database
+    password: ${MERCURY_DB_PASSWORD}  # Password for the database
+    url: jdbc:postgresql://${MERCURY_DB_URI}:${MERCURY_DB_PORT}/${MERCURY_DB_NAME}  # JDBC URL for the database
+    driver-class-name: org.postgresql.Driver  # Driver class name for PostgresSQL
+
+    # Connection pool settings
+    hikari:
+      connectionTimeout: 30000  # Connection timeout for HikariCP
+      maxLifetime: 1800000  # Maximum lifetime for HikariCP connections
+      poolName: SpringBootJPAHikariCP-DirectoryBackend  # Pool name for HikariCP
+      idleTimeout: 30000  # Idle timeout for HikariCP
+      minimumIdle: 1  # Minimum idle connections for HikariCP
+      maximumPoolSize: 5  # Maximum pool size for HikariCP
+
+  # JPA (Java Persistence API) settings
+  jpa:
+    hibernate.ddl-auto: none  # Hibernate DDL auto setting
+    show-sql: false  # Show SQL statements
+    database: POSTGRESQL  # Database type
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgresSQL
+    properties:
+      jdbc:
+        lob.non_contextual_creation: true  # Non-contextual LOB creation
+    log-level: error  # Log level for JPA
+#<><><><><><><><><><><><><><> MONGO DB <><><><><><><><><><><><><><>
+  data:
+    mongodb:
+      uuidRepresentation: STANDARD
+      host: ${MONGO_HOST}
+      port: ${MONGO_PORT}
+      database: ${MONGO_DATABASE}
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
+      uri: mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}?retryWrites=true&w=majority
+  #<><><><><><><><><><><><><><> EMAIL <><><><><><><><><><><><><><>
   mail:
-    host: ${MAIL_HOST} #TODO Must be change with Dynamic value
-    port: ${MAIL_PORT} #TODO Must be change with Dynamic value
-    username: ${MAIL_USERNAME} #TODO Must be change with Dynamic value
-    password: ${MAIL_PASSWORD} #TODO Must be change with Dynamic value
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     default-encoding: ${MAIL_PROPERTIES_DEFAULT_ENCODING}
     protocol: ${MAIL_PROTOCOL}
     properties:
@@ -172,6 +219,55 @@ camel:
 telegram:
   url: https://api.telegram.org/bot${TELEGRAM_TOKEN_ID}/sendMessage
   parser-mode: ${TELEGRAM_PARSE_MODE}
+
+cache:
+  infinispan:
+    config: classpath:infinispan.xml
+  emails-messages:
+    id: ${CACHE_EMAIL_MESSAGE_ID}
+    expiration: 300
+    time-unit: SECONDS
+    maximum-size: 1000
+    initial-capacity: 1000
+    eviction: LRU
+    eviction-strategy: LIRS
+    eviction-max-entry-size: 1000
+    eviction-max-entries: 1000
+    eviction-thread-pool-size: 10
+    eviction-thread-pool-priority: 5
+    eviction-wake-up-interval: 1000
+    eviction-wake-up-interval-time-unit: MILLISECONDS
+    eviction-max-thread-runs: 1000
+    eviction-max-size: 1000
+    eviction-min-size: 1000
+    eviction-min-time-to-live: 1000
+    eviction-max-time-to-live: 1000
+    eviction-lifo: true
+    eviction-async: true
+    eviction-async-pool-size: 10
+    eviction-async-pool-priority: 5
+    eviction-async-wake-up-interval: 1000
+    eviction-async-wake-up-interval-time-unit: MILLISECONDS
+    eviction-async-max-thread-runs: 1000
+    eviction-async-min-size: 1000
+    eviction-async-min-time-to-live: 1000
+    eviction-async-max-time-to-live: 1000
+    eviction-async-lifo: true
+    eviction-async-store: true
+    eviction-async-store-thread-pool-size: 10
+    eviction-async-store-thread-pool-priority: 5
+    eviction-async-store-wake-up-interval: 1000
+    eviction-async-store-wake-up-interval-time-unit: MILLISECONDS
+    eviction-async-store-max-thread-runs: 1000
+    eviction-async-store-min-size: 1000
+    eviction-async-store-min-time-to-live: 1000
+    eviction-async-store-max-time-to-live: 1000
+    eviction-async-store-lifo: true
+    eviction-async-store-timeout: 1000
+    eviction-async-store-timeout-time-unit: MILLISECONDS
+    eviction-async-store-queue-size: 1000
+    eviction-async-store-flush-lock-timeout: 1000
+
 codekey:
   message:
     INF_001: '[${spring.profiles.active}] Acceso autorizado'
