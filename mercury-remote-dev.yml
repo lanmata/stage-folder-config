@@ -1,5 +1,9 @@
 # Configuration for PRX authentication and security settings
 prx:
+  verification:
+    code:
+      template:
+        id: ${PRX_VERIFICATION_CODE_TEMPLATE_ID}  # Verification code template ID
   bootstrap:
     server:
       url: ${BOOTSTRAP_SERVER_URI}
