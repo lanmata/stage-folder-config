@@ -7,6 +7,7 @@ prx:
   bootstrap:
     server:
       url: ${BOOTSTRAP_SERVER_URI} # URL for the bootstrap server
+      port: ${BOOTSTRAP_SERVER_PORT} # Port for the bootstrap server
   producer:
     mercury:
       topic: ${MERCURY_EMAIL_TOPIC}

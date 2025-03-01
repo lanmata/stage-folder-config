@@ -1,0 +1,157 @@
+---
+#<><><><><><><><><><><><><><> TRUSTSTORE <><><><><><><><><><><><><><>
+trust.store: classpath:${SSL_TRUSTSTORE_FILE}
+trust.store.password: ${SSL_TRUSTSTORE_PASSWORD}
+##<><><><><><><><><><><><><><> SERVER <><><><><><><><><><><><><><>
+server:
+  port: ${CNFS_PORT}
+  #<><><><><><><><><><><><><><> SSL <><><><><><><><><><><><><><>
+  ssl:
+    # Enables SSL for the server
+    enabled: true
+    # The SSL bundle for the server
+    bundle: config-server-sec
+    enabled-protocols: TLSv1.3
+    compression:
+      enabled: true
+      mime-types: text/html,text/xml,text/plain,text/css,application/json
+      min-response-size: 1024
+spring:
+  application:
+    name: ${app.name}
+  main:
+    allow-bean-definition-overriding: true
+  ssl:
+    bundle:
+      jks:
+        config-server-sec:
+          key:
+            alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
+          keystore:
+            location: classpath:${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION}
+            password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD}
+            type: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_TYPE}
+  cloud:
+    bootstrap:
+      enabled: true
+    distutils:
+      # Default hostname for the application
+      default-hostname: prx-qa.config-server.tst
+      # List of network interfaces to ignore
+      ignoredInterfaces:
+        - docker
+        - eth.*
+        - lo
+      # Preferred network for the application
+      preferredNetworks:
+        - 172.18.0
+    discovery:
+      # Enables service discovery
+      enabled: true
+    config:
+      enabled: true
+      profile: ${SPRING_BOOT_PROFILE_ACTIVE}
+      # Label for the configuration
+      label: ${SPRING_CLOUD_CONFIG_LABEL}
+      import-check:
+        # Enables import check
+        enabled: ${VAULT_IMPORT_CHECK_ENABLED}
+      server:
+        bootstrap: true
+        #<><><><><><><><><><><><><><> VAULT <><><><><><><><><><><><><><>
+        vault:
+          # Enables vault for secure configuration
+          enabled: ${VAULT_ENABLED}
+          # Hostname for the vault server
+          host: ${VAULT_SERVER_URI}
+          # Port for the vault server
+          port: ${VAULT_SERVER_PORT}
+          # Authentication method for the vault server
+          authentication: TOKEN
+          # Token for the vault server
+          token: ${VAULT_TOKEN}
+          # Protocol for the vault server
+          scheme: http
+          # Backend for the vault server
+          backend: PRX
+          # Enables fail-fast mode
+          fail-fast: true
+          # Version of the key-value store used in vault
+          kvVersion: 2
+          # Order of the vault in the configuration
+          order: 1
+          # Separator for the profile in the vault
+          profileSeparator: '/'
+            # Timeout for the vault operations
+          timeout:
+            # Connection timeout for the vault server
+            connect: 5000
+            # Read timeout for the vault server
+            read: 15000
+        #<><><><><><><><><><><><><><> GIT <><><><><><><><><><><><><><>
+        git:
+          # Order of the git in the configuration
+          order: 2
+          # URI for the git repository
+          uri: ${GIT_URI}
+          # Timeout for the git operations
+          timeout: 500
+          # Disables strict host key checking
+          strict-host-key-checking: false
+          # Enables clone on start
+          clone-on-start: true
+          # Passphrase for the git operations
+          passphrase: ${GIT_PASSPHRASE}
+          # Preferred authentication method for the git operations
+          preferred-authentications: passphrase
+          # File containing known hosts for the git operations
+          known-hosts-file: known_hosts
+          # Host key for the git operations
+          host-key: ${GIT_HOST_KEY}
+          # Algorithm for the host key
+          hostKeyAlgorithm: ssh-ed25519
+          # File containing the private key for the git operations
+          private_key_file: ${GIT_PRIVATE_FILE}
+          # Disables trying the master branch
+          try-master-branch: false
+          repos:
+            config-server:
+              # Patterns for the git repository
+              pattern:
+                - '*/developer'
+                - '*/Develop'
+                - '*/dev'
+              # URI for the git repository
+              uri: ${GIT_URI}
+          # Default label for the git operations
+          default-label: ${GIT_LABEL}
+#<><><><><><><><><><><><><><> EUREKA <><><><><><><><><><><><><><>
+eureka:
+  client:
+    tls:
+      trust-store-type: ${SSL_JKS_SD_TRUSTSTORE_TYPE}
+      trust-store-password: ${SSL_JKS_SD_TRUSTSTORE_PASSWORD}
+      trust-store: classpath:${SSL_JKS_SD_TRUSTSTORE_LOCATION}
+      key-store-type: ${SSL_JKS_SD_KEYSTORE_TYPE}
+      key-store-password: ${SSL_JKS_SD_KEYSTORE_PASSWORD}
+      key-store: classpath:${SSL_JKS_SD_KEYSTORE_LOCATION}
+      key-password: ${SSL_JKS_SD_KEYSTORE_PASSWORD}
+      enabled: true
+    # Port for the Eureka server
+    eurekaServerPort: ${SD_PORT}
+    # DNS name for the Eureka server
+    eurekaServerDNSName: ${SD_URL}
+    # Enables fetching the registry from Eureka
+    fetch-registry: true
+    # Enables registration with Eureka
+    register-with-eureka: ${SD_REGISTER_ENABLED}
+    serviceUrl:
+      # Default zone for the Eureka server
+      defaultZone: ${SD_URL}:${SD_PORT}/eureka/
+  instance:
+    # Disables non-secure port
+    nonSecurePortEnabled: false
+    # Enables secure port
+    securePortEnabled: true
+    # Hostname for the Eureka instance
+    hostName: ${SD_INSTANCE_HOST_NAME}
