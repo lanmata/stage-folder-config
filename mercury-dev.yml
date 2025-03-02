@@ -40,7 +40,10 @@ app:
   name: mercury
   version: 0.0.1
   api:
-    endpoint: /api/v1
+    excludes: none
+    exclude:
+      methods: ${EXCLUDE_METHODS}
+    endpoint: /api/v1  # API endpoint for the application
 
 # Server configuration
 server:
