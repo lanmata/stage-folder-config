@@ -15,6 +15,9 @@ prx:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
       principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
+  directory:
+    role-id: ${INITIAL_ROLE_ID}  # Initial role ID for the directory
+    application-id: ${APPLICATION_ID}  # Initial application ID for the directory
   security:
     keystore:
       location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore
