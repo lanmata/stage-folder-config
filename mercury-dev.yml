@@ -6,7 +6,8 @@ prx:
         id: ${PRX_VERIFICATION_CODE_TEMPLATE_ID}  # Verification code template ID
   bootstrap:
     server:
-      url: ${BOOTSTRAP_SERVER_URI}
+      url: ${BOOTSTRAP_SERVER_URI} # URL for the bootstrap server
+      port: ${BOOTSTRAP_SERVER_PORT} # Port for the bootstrap server
   consumer:
     mercury:
       topic: ${MERCURY_EMAIL_TOPIC}
