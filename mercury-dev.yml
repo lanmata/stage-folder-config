@@ -6,7 +6,8 @@ prx:
         id: ${PRX_VERIFICATION_CODE_TEMPLATE_ID}  # Verification code template ID
   bootstrap:
     server:
-      url: ${BOOTSTRAP_SERVER_URI}
+      url: ${BOOTSTRAP_SERVER_URI} # URL for the bootstrap server
+      port: ${BOOTSTRAP_SERVER_PORT} # Port for the bootstrap server
   consumer:
     mercury:
       topic: ${MERCURY_EMAIL_TOPIC}
@@ -39,7 +40,10 @@ app:
   name: mercury
   version: 0.0.1
   api:
-    endpoint: /api/v1
+    excludes: none
+    exclude:
+      methods: ${EXCLUDE_METHODS}
+    endpoint: /api/v1  # API endpoint for the application
 
 # Server configuration
 server:

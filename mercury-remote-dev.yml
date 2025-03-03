@@ -6,7 +6,8 @@ prx:
         id: ${PRX_VERIFICATION_CODE_TEMPLATE_ID}  # Verification code template ID
   bootstrap:
     server:
-      url: ${BOOTSTRAP_SERVER_URI}
+      url: ${BOOTSTRAP_SERVER_URI} # URL for the bootstrap server
+      port: ${BOOTSTRAP_SERVER_PORT} # Port for the bootstrap server
   consumer:
     mercury:
       topic: ${MERCURY_EMAIL_TOPIC}
@@ -14,6 +15,9 @@ prx:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
       principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
+  directory:
+    role-id: ${INITIAL_ROLE_ID}  # Initial role ID for the directory
+    application-id: ${APPLICATION_ID}  # Initial application ID for the directory
   security:
     keystore:
       location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore
@@ -39,7 +43,10 @@ app:
   name: mercury
   version: 0.0.1
   api:
-    endpoint: /api/v1
+    excludes: none
+    exclude:
+      methods: ${EXCLUDE_METHODS}
+    endpoint: /api/v1  # API endpoint for the application
 
 # Server configuration
 server:
