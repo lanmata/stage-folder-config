@@ -1,9 +1,23 @@
 # Configuration for PRX authentication and security settings
 prx:
+  verification:
+    code:
+      template:
+        id: ${PRX_VERIFICATION_CODE_TEMPLATE_ID}  # Verification code template ID
+  bootstrap:
+    server:
+      url: ${BOOTSTRAP_SERVER_URI} # URL for the bootstrap server
+      port: ${BOOTSTRAP_SERVER_PORT} # Port for the bootstrap server
+  consumer:
+    mercury:
+      topic: ${MERCURY_EMAIL_TOPIC}
   auth:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
       principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
+  directory:
+    role-id: ${INITIAL_ROLE_ID}  # Initial role ID for the directory
+    application-id: ${APPLICATION_ID}  # Initial application ID for the directory
   security:
     keystore:
       location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore
@@ -26,14 +40,17 @@ prx:
 
 # Application-specific settings
 app:
-  name: jobs-backend-api  # Name of the application
-  version: 1.0.0  # Version of the application
+  name: mercury
+  version: 0.0.1
   api:
+    excludes: none
+    exclude:
+      methods: ${EXCLUDE_METHODS}
     endpoint: /api/v1  # API endpoint for the application
 
 # Server configuration
 server:
-  port: ${JOBS_OFFER_PORT}  # Port for the server
+  port: ${APP_PORT}  # Port for the server
   http2:
     enabled: true  # Enable HTTP/2
 
@@ -41,28 +58,27 @@ server:
 spring:
   application:
     name: ${app.name}  # Name of the Spring application
-    description: Jobs Backend API  # Description of the Spring application
+    description: Mercury API  # Description of the Spring application
   main:
     allow-bean-definition-overriding: true  # Allow bean definition overriding
     banner-mode: console  # Set banner mode to console
   server:
-    port: ${server.port}  # Port for the Spring server
+    port: ${APP_PORT}  # Port for the Spring server
     ssl:
       enabled: true  # Enable SSL
-      bundle: jobs-offer-security  # SSL bundle name
-
+      bundle: mercury-security  # SSL bundle name
   # Database configuration
   datasource:
-    username: ${JOB_OFFERS_DB_USERNAME}  # Username for the database
-    password: ${JOB_OFFERS_DB_PASSWORD}  # Password for the database
-    url: jdbc:postgresql://${JOB_OFFERS_DB_URI}:${JOB_OFFERS_DB_PORT}/${JOB_OFFERS_DB_NAME}  # JDBC URL for the database
-    driver-class-name: org.postgresql.Driver  # Driver class name for PostgreSQL
+    username: ${MERCURY_DB_USERNAME}  # Username for the database
+    password: ${MERCURY_DB_PASSWORD}  # Password for the database
+    url: jdbc:postgresql://${MERCURY_DB_URI}:${MERCURY_DB_PORT}/${MERCURY_DB_NAME}  # JDBC URL for the database
+    driver-class-name: org.postgresql.Driver  # Driver class name for PostgresSQL
 
     # Connection pool settings
     hikari:
       connectionTimeout: 30000  # Connection timeout for HikariCP
       maxLifetime: 1800000  # Maximum lifetime for HikariCP connections
-      poolName: SpringBootJPAHikariCP-JobsBackend  # Pool name for HikariCP
+      poolName: SpringBootJPAHikariCP-DirectoryBackend  # Pool name for HikariCP
       idleTimeout: 30000  # Idle timeout for HikariCP
       minimumIdle: 1  # Minimum idle connections for HikariCP
       maximumPoolSize: 5  # Maximum pool size for HikariCP
@@ -72,22 +88,55 @@ spring:
     hibernate.ddl-auto: none  # Hibernate DDL auto setting
     show-sql: false  # Show SQL statements
     database: POSTGRESQL  # Database type
-    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgreSQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgresSQL
     properties:
       jdbc:
         lob.non_contextual_creation: true  # Non-contextual LOB creation
     log-level: error  # Log level for JPA
-
-  test:
-    context:
-      failure:
-        threshold: 10000000  # Failure threshold for test context
+#<><><><><><><><><><><><><><> MONGO DB <><><><><><><><><><><><><><>
+  data:
+    mongodb:
+      uuidRepresentation: STANDARD
+      host: ${MONGO_HOST}
+      port: ${MONGO_PORT}
+      database: ${MONGO_DATABASE}
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}
+      uri: mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}?retryWrites=true&w=majority
+  #<><><><><><><><><><><><><><> EMAIL <><><><><><><><><><><><><><>
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    default-encoding: ${MAIL_PROPERTIES_DEFAULT_ENCODING}
+    protocol: ${MAIL_PROTOCOL}
+    properties:
+      mail:
+        timeout: ${MAIL_PROPERTIES_TIMEOUT}
+        smtp:
+          auth: ${MAIL_PROPERTIES_SMTP_AUTH}
+          starttls:
+            enable: ${MAIL_PROPERTIES_STARTTLS_ENABLED}
+            required: ${MAIL_PROPERTIES_STARTTLS_REQUIRED}
+          ssl:
+            enable: ${MAIL_PROPERTIES_SSL_ENABLED}
+    test-connection: ${MAIL_PROPERTIES_TEST_CONNECTION}
+  google:
+    client-id: ${GOOGLE_CLIENT_ID}
+    client-secret: ${GOOGLE_CLIENT_SECRET}
+    refresh-token: ${GOOGLE_REFRESH_TOKEN}
+    from-email: ${GOOGLE_FROM_EMAIL}
+    token-uri: ${GOOGLE_TOKEN_URI}
+  freemarker:
+    template-loader-path: ${TEMPLATE_PATH}
+    suffix: ${TEMPLATE_SUFFIX}
 
   # SSL configuration
   ssl:
     bundle:
       jks:
-        jobs-offer-security:
+        mercury-security:
           key:
             alias: ${SSL_KEY_ALIAS}  # Alias for the SSL key
           keystore:
@@ -120,7 +169,7 @@ cloud:
 
   data:
     rest:
-      base-path: /api  # Base path for REST data
+      base-path: /api/v1  # Base path for REST data
 
 # Eureka service discovery configuration
 eureka:
@@ -169,21 +218,78 @@ springdoc:
   group-configs:
     - group: All  # Group for all endpoints
       paths-to-match: ${app.api.endpoint}/**/**
-    - group: Companies  # Group for company-related endpoints
-      paths-to-match: ${app.api.endpoint}/companies/**
-    - group: Job-offers  # Group for job offer-related endpoints
-      paths-to-match: ${app.api.endpoint}/job-offers/**
-    - group: Modes  # Group for mode-related endpoints
-      paths-to-match: ${app.api.endpoint}/modes/**
-    - group: Reports  # Group for report-related endpoints
-      paths-to-match: ${app.api.endpoint}/reports/**
-    - group: Position  # Group for position-related endpoints
-      paths-to-match: ${app.api.endpoint}/positions/**
-    - group: Sources  # Group for source-related endpoints
-      paths-to-match: ${app.api.endpoint}/sources/**
-    - group: Source-types  # Group for source type-related endpoints
-      paths-to-match: ${app.api.endpoint}/source-types/**
-    - group: Status  # Group for status-related endpoints
-      paths-to-match: ${app.api.endpoint}/status/**
-    - group: Terms  # Group for term-related endpoints
-      paths-to-match: ${app.api.endpoint}/terms/**
+    - group: Users  # Group for company-related endpoints
+      paths-to-match: ${app.api.endpoint}/mail
+
+camel:
+  springboot:
+    main-run-controller: ${CAMEL_MAIN_RUN_CONTROLLER}
+  # Token ID del Bot utilizado
+  #<><><><><><><><><><><><><><> TELEGRAM CLIENT <><><><><><><><><><><><><><>
+  component:
+    telegram:
+      authorization-token: ${TELEGRAM_TOKEN_ID}
+telegram:
+  url: https://api.telegram.org/bot${TELEGRAM_TOKEN_ID}/sendMessage
+  parser-mode: ${TELEGRAM_PARSE_MODE}
+
+cache:
+  infinispan:
+    config: classpath:infinispan.xml
+  emails-messages:
+    id: ${CACHE_EMAIL_MESSAGE_ID}
+    expiration: 300
+    time-unit: SECONDS
+    maximum-size: 1000
+    initial-capacity: 1000
+    eviction: LRU
+    eviction-strategy: LIRS
+    eviction-max-entry-size: 1000
+    eviction-max-entries: 1000
+    eviction-thread-pool-size: 10
+    eviction-thread-pool-priority: 5
+    eviction-wake-up-interval: 1000
+    eviction-wake-up-interval-time-unit: MILLISECONDS
+    eviction-max-thread-runs: 1000
+    eviction-max-size: 1000
+    eviction-min-size: 1000
+    eviction-min-time-to-live: 1000
+    eviction-max-time-to-live: 1000
+    eviction-lifo: true
+    eviction-async: true
+    eviction-async-pool-size: 10
+    eviction-async-pool-priority: 5
+    eviction-async-wake-up-interval: 1000
+    eviction-async-wake-up-interval-time-unit: MILLISECONDS
+    eviction-async-max-thread-runs: 1000
+    eviction-async-min-size: 1000
+    eviction-async-min-time-to-live: 1000
+    eviction-async-max-time-to-live: 1000
+    eviction-async-lifo: true
+    eviction-async-store: true
+    eviction-async-store-thread-pool-size: 10
+    eviction-async-store-thread-pool-priority: 5
+    eviction-async-store-wake-up-interval: 1000
+    eviction-async-store-wake-up-interval-time-unit: MILLISECONDS
+    eviction-async-store-max-thread-runs: 1000
+    eviction-async-store-min-size: 1000
+    eviction-async-store-min-time-to-live: 1000
+    eviction-async-store-max-time-to-live: 1000
+    eviction-async-store-lifo: true
+    eviction-async-store-timeout: 1000
+    eviction-async-store-timeout-time-unit: MILLISECONDS
+    eviction-async-store-queue-size: 1000
+    eviction-async-store-flush-lock-timeout: 1000
+
+codekey:
+  message:
+    INF_001: '[${spring.profiles.active}] Acceso autorizado'
+    INF_002: '[${spring.profiles.active}] Acción completada'
+    INF_003: '[${spring.profiles.active}] Usuario ya se encuentra con una sesion activa'
+    INF_004: '[${spring.profiles.active}] Sesion de usuario terminada'
+    INF_005: '[${spring.profiles.active}] Comando sin programar'
+    WAR_001: '[${spring.profiles.active}] Acceso NO autorizado'
+    WAR_002: '[${spring.profiles.active}] Usuario no existe'
+    WAR_003: '[${spring.profiles.active}] Comando vacio'
+    WAR_004: '[${spring.profiles.active}] Comando NO valido'
+    WAR_005: '[${spring.profiles.active}] Usuario NO esta activo'

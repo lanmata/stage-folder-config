@@ -25,7 +25,7 @@ prx:
         password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the truststore for management
   logging:
     trace:
-      enabled: ${LOGGING_TRACE_ENABLE} # Enable trace logging
+      enabled: ${LOGGING_TRACE_ENABLED} # Enable trace logging
 # Application-specific settings
 app:
   api:
@@ -127,6 +127,10 @@ spring:
 # Eureka service discovery configuration
 eureka:
   client:
+    jersey:
+      enabled: false
+    restclient:
+      enabled: false
     application:
       name: ${app.name}  # Name of the Eureka client application
     enabled: on  # Enable Eureka client

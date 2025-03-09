@@ -29,7 +29,7 @@ app:
   name: jobs-backend-api  # Name of the application
   version: 1.0.0  # Version of the application
   api:
-    endpoint: /jobs-backend/api/v1  # API endpoint for the application
+    endpoint: /jobs-offer/api/v1  # API endpoint for the application
 
 # Server configuration
 server:
@@ -125,6 +125,10 @@ cloud:
 # Eureka service discovery configuration
 eureka:
   client:
+    jersey:
+      enabled: false
+    restclient:
+      enabled: false
     application:
       name: ${app.name}  # Name of the Eureka client application
     enabled: on  # Enable Eureka client

@@ -1,9 +1,23 @@
 # Configuration for PRX authentication and security settings
 prx:
+  verification:
+    code:
+      template:
+        id: ${PRX_VERIFICATION_CODE_TEMPLATE_ID}  # Verification code template ID
+  bootstrap:
+    server:
+      url: ${BOOTSTRAP_SERVER_URI} # URL for the bootstrap server
+      port: ${BOOTSTRAP_SERVER_PORT} # Port for the bootstrap server
+  producer:
+    mercury:
+      topic: ${MERCURY_EMAIL_TOPIC}
   auth:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
       principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
+  directory:
+    role-id: ${INITIAL_ROLE_ID}  # Initial role ID for the directory
+    application-id: ${APPLICATION_ID}  # Initial application ID for the directory
   security:
     keystore:
       location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore
@@ -26,14 +40,18 @@ prx:
 
 # Application-specific settings
 app:
-  name: jobs-backend-api  # Name of the application
-  version: 1.0.0  # Version of the application
+  name: directory-backend  # Name of the application
+  version: 0.0.1  # Version of the application
+
   api:
+    excludes: none
+    exclude:
+      methods: ${EXCLUDE_METHODS}
     endpoint: /api/v1  # API endpoint for the application
 
 # Server configuration
 server:
-  port: ${JOBS_OFFER_PORT}  # Port for the server
+  port: ${APP_PORT}  # Port for the server
   http2:
     enabled: true  # Enable HTTP/2
 
@@ -41,7 +59,7 @@ server:
 spring:
   application:
     name: ${app.name}  # Name of the Spring application
-    description: Jobs Backend API  # Description of the Spring application
+    description: Directory Backend API  # Description of the Spring application
   main:
     allow-bean-definition-overriding: true  # Allow bean definition overriding
     banner-mode: console  # Set banner mode to console
@@ -49,20 +67,20 @@ spring:
     port: ${server.port}  # Port for the Spring server
     ssl:
       enabled: true  # Enable SSL
-      bundle: jobs-offer-security  # SSL bundle name
+      bundle: directory-backend-security  # SSL bundle name
 
   # Database configuration
   datasource:
-    username: ${JOB_OFFERS_DB_USERNAME}  # Username for the database
-    password: ${JOB_OFFERS_DB_PASSWORD}  # Password for the database
-    url: jdbc:postgresql://${JOB_OFFERS_DB_URI}:${JOB_OFFERS_DB_PORT}/${JOB_OFFERS_DB_NAME}  # JDBC URL for the database
+    username: ${DIRECTORY_DB_USERNAME}  # Username for the database
+    password: ${DIRECTORY_DB_PASSWORD}  # Password for the database
+    url: jdbc:postgresql://${DIRECTORY_DB_URI}:${DIRECTORY_DB_PORT}/${DIRECTORY_DB_NAME}  # JDBC URL for the database
     driver-class-name: org.postgresql.Driver  # Driver class name for PostgreSQL
 
     # Connection pool settings
     hikari:
       connectionTimeout: 30000  # Connection timeout for HikariCP
       maxLifetime: 1800000  # Maximum lifetime for HikariCP connections
-      poolName: SpringBootJPAHikariCP-JobsBackend  # Pool name for HikariCP
+      poolName: SpringBootJPAHikariCP-DirectoryBackend  # Pool name for HikariCP
       idleTimeout: 30000  # Idle timeout for HikariCP
       minimumIdle: 1  # Minimum idle connections for HikariCP
       maximumPoolSize: 5  # Maximum pool size for HikariCP
@@ -87,7 +105,7 @@ spring:
   ssl:
     bundle:
       jks:
-        jobs-offer-security:
+        directory-backend-security:
           key:
             alias: ${SSL_KEY_ALIAS}  # Alias for the SSL key
           keystore:
@@ -120,7 +138,7 @@ cloud:
 
   data:
     rest:
-      base-path: /api  # Base path for REST data
+      base-path: /api/v1  # Base path for REST data
 
 # Eureka service discovery configuration
 eureka:
@@ -169,21 +187,5 @@ springdoc:
   group-configs:
     - group: All  # Group for all endpoints
       paths-to-match: ${app.api.endpoint}/**/**
-    - group: Companies  # Group for company-related endpoints
-      paths-to-match: ${app.api.endpoint}/companies/**
-    - group: Job-offers  # Group for job offer-related endpoints
-      paths-to-match: ${app.api.endpoint}/job-offers/**
-    - group: Modes  # Group for mode-related endpoints
-      paths-to-match: ${app.api.endpoint}/modes/**
-    - group: Reports  # Group for report-related endpoints
-      paths-to-match: ${app.api.endpoint}/reports/**
-    - group: Position  # Group for position-related endpoints
-      paths-to-match: ${app.api.endpoint}/positions/**
-    - group: Sources  # Group for source-related endpoints
-      paths-to-match: ${app.api.endpoint}/sources/**
-    - group: Source-types  # Group for source type-related endpoints
-      paths-to-match: ${app.api.endpoint}/source-types/**
-    - group: Status  # Group for status-related endpoints
-      paths-to-match: ${app.api.endpoint}/status/**
-    - group: Terms  # Group for term-related endpoints
-      paths-to-match: ${app.api.endpoint}/terms/**
+    - group: Users  # Group for company-related endpoints
+      paths-to-match: ${app.api.endpoint}/users
