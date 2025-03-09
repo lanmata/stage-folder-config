@@ -105,10 +105,10 @@ spring:
       uri: mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}?retryWrites=true&w=majority
   #<><><><><><><><><><><><><><> EMAIL <><><><><><><><><><><><><><>
   mail:
-    host: ${MAIL_HOST} #TODO Must be change with Dynamic value
-    port: ${MAIL_PORT} #TODO Must be change with Dynamic value
-    username: ${MAIL_USERNAME} #TODO Must be change with Dynamic value
-    password: ${MAIL_PASSWORD} #TODO Must be change with Dynamic value
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     default-encoding: ${MAIL_PROPERTIES_DEFAULT_ENCODING}
     protocol: ${MAIL_PROTOCOL}
     properties:
@@ -122,6 +122,12 @@ spring:
           ssl:
             enable: ${MAIL_PROPERTIES_SSL_ENABLED}
     test-connection: ${MAIL_PROPERTIES_TEST_CONNECTION}
+  google:
+    client-id: ${GOOGLE_CLIENT_ID}
+    client-secret: ${GOOGLE_CLIENT_SECRET}
+    refresh-token: ${GOOGLE_REFRESH_TOKEN}
+    from-email: ${GOOGLE_FROM_EMAIL}
+    token-uri: ${GOOGLE_TOKEN_URI}
   freemarker:
     template-loader-path: ${TEMPLATE_PATH}
     suffix: ${TEMPLATE_SUFFIX}
