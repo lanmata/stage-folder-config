@@ -15,6 +15,9 @@ prx:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
       principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
+  directory:
+    role-id: ${INITIAL_ROLE_ID}  # Initial role ID for the directory
+    application-id: ${APPLICATION_ID}  # Initial application ID for the directory
   security:
     keystore:
       location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore
@@ -119,6 +122,12 @@ spring:
           ssl:
             enable: ${MAIL_PROPERTIES_SSL_ENABLED}
     test-connection: ${MAIL_PROPERTIES_TEST_CONNECTION}
+  google:
+    client-id: ${GOOGLE_CLIENT_ID}
+    client-secret: ${GOOGLE_CLIENT_SECRET}
+    refresh-token: ${GOOGLE_REFRESH_TOKEN}
+    from-email: ${GOOGLE_FROM_EMAIL}
+    token-uri: ${GOOGLE_TOKEN_URI}
   freemarker:
     template-loader-path: ${TEMPLATE_PATH}
     suffix: ${TEMPLATE_SUFFIX}
