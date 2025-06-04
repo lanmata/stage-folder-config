@@ -105,6 +105,9 @@ spring:
       uri: mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}?retryWrites=true&w=majority
   #<><><><><><><><><><><><><><> EMAIL <><><><><><><><><><><><><><>
   mail:
+    smtp:
+      ssl:
+        trust: ${MAIL_HOST}  # Trust the mail server
     host: ${MAIL_HOST}
     port: ${MAIL_PORT}
     username: ${MAIL_USERNAME}
