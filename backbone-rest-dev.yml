@@ -73,14 +73,20 @@ spring:
   # JPA (Java Persistence API) settings
   jpa:
     hibernate.ddl-auto: none
-    show-sql: false
     database: POSTGRESQL
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
+        show_sql: true
+        format_sql: true
         jdbc:
           lob.non_contextual_creation: true
     log-level: error
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: TRACE
+
 
   test:
     context:
