@@ -74,13 +74,13 @@ spring:
     username: ${DIRECTORY_DB_USERNAME}  # Username for the database
     password: ${DIRECTORY_DB_PASSWORD}  # Password for the database
     url: jdbc:postgresql://${DIRECTORY_DB_URI}:${DIRECTORY_DB_PORT}/${DIRECTORY_DB_NAME}  # JDBC URL for the database
-    driver-class-name: org.postgresql.Driver  # Driver class name for PostgreSQL
+    driver-class-name: org.postgresql.Driver  # Driver class name for PostgresSQL
 
     # Connection pool settings
     hikari:
       connectionTimeout: 30000  # Connection timeout for HikariCP
       maxLifetime: 1800000  # Maximum lifetime for HikariCP connections
-      poolName: SpringBootJPAHikariCP-DirectoryBackend  # Pool name for HikariCP
+      poolName: SpringBootJPAHikariCP-Mercury  # Pool name for HikariCP
       idleTimeout: 30000  # Idle timeout for HikariCP
       minimumIdle: 1  # Minimum idle connections for HikariCP
       maximumPoolSize: 5  # Maximum pool size for HikariCP
@@ -90,7 +90,7 @@ spring:
     hibernate.ddl-auto: none  # Hibernate DDL auto setting
     show-sql: false  # Show SQL statements
     database: POSTGRESQL  # Database type
-    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgreSQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Hibernate dialect for PostgresSQL
     properties:
       jdbc:
         lob.non_contextual_creation: true  # Non-contextual LOB creation

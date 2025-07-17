@@ -1,5 +1,7 @@
 # Configuration for PRX authentication and security settings
 prx:
+  backbone:
+    bucket-img: ${BUCKET_IMG}
   auth:
     converter:
       resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
