@@ -1,52 +1,34 @@
----
-#<><><><><><><><><><><><><><> TRUSTSTORE <><><><><><><><><><><><><><>
-trust.store: classpath:${SSL_TRUSTSTORE_FILE}
-trust.store.password: ${SSL_TRUSTSTORE_PASSWORD}
 ##<><><><><><><><><><><><><><> SERVER <><><><><><><><><><><><><><>
 server:
-  port: ${CNFS_PORT}
-  #<><><><><><><><><><><><><><> SSL <><><><><><><><><><><><><><>
+  port: ${CNFS_PORT:8082}
   ssl:
-    # Enables SSL for the server
+    enabled: ${SERVER_SSL_ENABLED:true}
+    key-store: classpath:${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION:prx-qa.config-server.jks}
+    key-store-password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD:changeit}
+    key-alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS:config-server}
+    trust-store: classpath:${SSL_JKS_CONFIG_SERVER_TRUSTSTORE_LOCATION:prx-truststore.jks}
+    trust-store-password: ${SSL_JKS_CONFIG_SERVER_TRUSTSTORE_PASSWORD:changeit}
+  compression:
     enabled: true
-    # The SSL bundle for the server
-    bundle: config-server-sec
-    enabled-protocols: TLSv1.3
-    compression:
-      enabled: true
-      mime-types: text/html,text/xml,text/plain,text/css,application/json
-      min-response-size: 1024
+    mime-types: text/html,text/xml,text/plain,text/css,application/json
+    min-response-size: 1024
+
 spring:
   application:
-    name: ${app.name}
+    name: ${app.name:prx-config-server}
   main:
     allow-bean-definition-overriding: true
-  ssl:
-    bundle:
-      jks:
-        config-server-sec:
-          key:
-            alias: ${SSL_JKS_CONFIG_SERVER_KEY_ALIAS}
-          keystore:
-            location: classpath:${SSL_JKS_CONFIG_SERVER_KEYSTORE_LOCATION}
-            password: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_PASSWORD}
-            type: ${SSL_JKS_CONFIG_SERVER_KEYSTORE_TYPE}
   cloud:
-    bootstrap:
-      enabled: true
-    distutils:
-      # Default hostname for the application
+    #<><><><><><><><><><><><><><> NETWORK <><><><><><><><><><><><><><>
+    inetutils:
       default-hostname: prx-qa.config-server.tst
-      # List of network interfaces to ignore
-      ignoredInterfaces:
+      ignored-interfaces:
         - docker
         - eth.*
         - lo
-      # Preferred network for the application
-      preferredNetworks:
+      preferred-networks:
         - 172.18.0
     discovery:
-      # Enables service discovery
       enabled: true
     config:
       enabled: true
@@ -82,7 +64,7 @@ spring:
           order: 1
           # Separator for the profile in the vault
           profileSeparator: '/'
-            # Timeout for the vault operations
+          # Timeout for the vault operations
           timeout:
             # Connection timeout for the vault server
             connect: 5000
@@ -125,23 +107,23 @@ spring:
               uri: ${GIT_URI}
           # Default label for the git operations
           default-label: ${GIT_LABEL}
+
 #<><><><><><><><><><><><><><> EUREKA <><><><><><><><><><><><><><>
 eureka:
   client:
     tls:
-      trust-store-type: ${SSL_JKS_SD_TRUSTSTORE_TYPE}
-      trust-store-password: ${SSL_JKS_SD_TRUSTSTORE_PASSWORD}
-      trust-store: classpath:${SSL_JKS_SD_TRUSTSTORE_LOCATION}
-      key-store-type: ${SSL_JKS_SD_KEYSTORE_TYPE}
-      key-store-password: ${SSL_JKS_SD_KEYSTORE_PASSWORD}
-      key-store: classpath:${SSL_JKS_SD_KEYSTORE_LOCATION}
-      key-password: ${SSL_JKS_SD_KEYSTORE_PASSWORD}
-      enabled: true
-    # Port for the Eureka server
-    eurekaServerPort: ${SD_PORT}
-    # DNS name for the Eureka server
-    eurekaServerDNSName: ${SD_URL}
-    # Enables fetching the registry from Eureka
+      trust-store-type: ${SSL_JKS_SD_TRUSTSTORE_TYPE:PKCS12}
+      trust-store-password: ${SSL_JKS_SD_TRUSTSTORE_PASSWORD:changeit}
+      trust-store: classpath:${SSL_JKS_SD_TRUSTSTORE_LOCATION:prx-truststore.jks}
+      key-store-type: ${SSL_JKS_SD_KEYSTORE_TYPE:PKCS12}
+      key-store-password: ${SSL_JKS_SD_KEYSTORE_PASSWORD:changeit}
+      key-store: classpath:${SSL_JKS_SD_KEYSTORE_LOCATION:prx-qa.config-server.jks}
+      key-password: ${SSL_JKS_SD_KEYSTORE_PASSWORD:13515030}
+      # CN=wildcard.tst has no SANs; hostname verification must be relaxed for this internal cert
+      disable-hostname-verification: ${EUREKA_TLS_DISABLE_HOSTNAME_VERIFICATION:true}
+      enabled: ${EUREKA_TLS_ENABLED:true}
+    eureka-server-port: ${SD_PORT:8761}
+    eureka-server-d-n-s-name: ${SD_URL:localhost}
     fetch-registry: true
     # Enables registration with Eureka
     register-with-eureka: ${SD_REGISTER_ENABLED}
