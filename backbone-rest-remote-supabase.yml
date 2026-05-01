@@ -1,0 +1,193 @@
+# Configuration for PRX authentication and security settings
+umdc:
+  backbone:
+    bucket-img: ${BUCKET_IMG}
+  auth:
+    converter:
+      resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
+      principal-claim-name: ${AUTH_RESOURCE_PRINCIPAL}  # Principal claim name for the resource
+  security:
+    keystore:
+      location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore
+      type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the keystore
+      password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the keystore
+    truststore:
+      location: ${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
+      type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}  # Type of the truststore
+      password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}  # Password for the truststore
+    management-authenticator:
+      enabled: true  # Enable management authenticator
+      keystore:
+        location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore for management
+        type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the keystore for management
+        password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the keystore for management
+      truststore:
+        location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the truststore for management
+        type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the truststore for management
+        password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the truststore for management
+  logging:
+    trace:
+      enabled: ${LOGGING_TRACE_ENABLED} # Enable trace logging
+# Application-specific settings
+app:
+  api:
+    endpoint: /backbone-rest/api/v1  # API endpoint for the application
+  environments:
+    contact:
+      limit: 5
+
+# Server configuration
+server:
+  port: ${APP_PORT}  # Port for the server
+  http2:
+    enabled: true  # Enable HTTP/2
+
+# Spring framework configuration
+spring:
+  application:
+    name: ${umdc.app.name}
+    description: Servicio de integracion
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: console
+  server:
+    port: ${server.port}  # Port for the Spring server
+    ssl:
+      enabled: true  # Enable SSL
+      bundle: backbone-rest-security  # SSL bundle name
+
+  # Database configuration
+  datasource:
+    username: ${GENERAL_DB_USERNAME}  # Username for the database
+    password: ${GENERAL_DB_PASSWORD}  # Password for the database
+    url: jdbc:postgresql://${GENERAL_DB_URI}:${GENERAL_DB_PORT}/${GENERAL_DB_NAME}  # JDBC URL for the database
+    driver-class-name: org.postgresql.Driver  # Driver class name for PostgreSQL
+
+    # Connection pool settings
+    hikari:
+      connectionTimeout: 30000
+      maxLifetime: 1800000
+      poolName: SpringBootJPAHikariCPbackbone
+      idleTimeout: 30000
+      minimumIdle: 1
+      maximumPoolSize: 5
+
+  # JPA (Java Persistence API) settings
+  jpa:
+    hibernate.ddl-auto: none
+    show-sql: false
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        jdbc:
+          lob.non_contextual_creation: true
+    log-level: error
+
+  test:
+    context:
+      failure:
+        threshold: 10000000  # Failure threshold for test context
+
+  # SSL configuration
+  ssl:
+    bundle:
+      jks:
+        jobs-offer-security:
+          key:
+            alias: ${SSL_KEY_ALIAS}  # Alias for the SSL key
+          keystore:
+            location: classpath:${SSL_KEYSTORE_LOCATION}  # Location of the keystore
+            password: ${SSL_KEYSTORE_PASSWORD}  # Password for the keystore
+            type: ${SSL_KEYSTORE_TYPE}  # Type of the keystore
+          trust-store:
+            location: classpath:${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
+            password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}  # Password for the truststore
+            type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}  # Type of the truststore
+
+  # Cloud configuration
+  cloud:
+    inetutils:
+      ignoredInterfaces:
+        - docker
+        - eth.*
+        - lo
+      preferredNetworks:
+        - 172.18.0
+  output:
+    ansi:
+      enabled: DETECT
+
+  # JMX (Java Management Extensions) settings
+  jmx:
+    default-domain: prx-backoffice-rest # Default domain for JMX
+
+  data:
+    rest:
+      base-path: /api # Base path for REST data
+
+# Eureka service discovery configuration
+eureka:
+  client:
+    jersey:
+      enabled: false
+    restclient:
+      enabled: false
+    application:
+      name: ${umdc.app.name}  # Name of the Eureka client application
+    enabled: on  # Enable Eureka client
+    tls:
+      trust-store-type: ${SSL_JKS_SRMN_TRUSTSTORE_TYPE}  # Trust store type for TLS
+      trust-store-password: ${SSL_JKS_SRMN_TRUSTSTORE_PASSWORD}  # Trust store password for TLS
+      trust-store: classpath:${SSL_JKS_SRMN_TRUSTSTORE_LOCATION}  # Trust store location for TLS
+      key-store-type: ${SSL_JKS_SRMN_KEYSTORE_TYPE}  # Key store type for TLS
+      key-store-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}  # Key store password for TLS
+      key-store: classpath:${SSL_JKS_SRMN_KEYSTORE_LOCATION}  # Key store location for TLS
+      key-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}  # Key password for TLS
+    eurekaServerPort: ${SRMN_PORT}  # Port for the Eureka server
+    eurekaServerDNSName: ${SRMN_URI}  # DNS name for the Eureka server
+    fetch-registry: true  # Enable fetching the registry from Eureka
+    register-with-eureka: ${SRMN_REGISTER_ENABLED}  # Enable registration with Eureka
+    serviceUrl:
+      defaultZone: ${SRMN_DEFAULT_ZONE}  # Default zone for the Eureka server
+  instance:
+    preferIpAddress: false  # Prefer IP address for Eureka instance
+    leaseRenewalIntervalInSeconds: 10  # Lease renewal interval for Eureka instance
+    leaseExpirationDurationInSeconds: 30  # Lease expiration duration for Eureka instance
+    nonSecurePortEnabled: false  # Disable non-secure port
+    securePortEnabled: true  # Enable secure port
+    hostName: ${SRMN_HOSTNAME}  # Hostname for the Eureka instance
+
+# Open API documentation configuration
+springdoc:
+  version: ${umdc.app.version}  # Version of the Open API documentation
+  api-docs:
+    version: openapi_3_1  # Version of the Open API specification
+  swagger-ui:
+    display-request-duration: true  # Display request duration in Swagger UI
+    groups-order: DESC  # Order groups in descending order
+    operationsSorter: method  # Sort operations by method
+    disable-swagger-default-url: true  # Disable default Swagger URL
+    use-root-path: true  # Use root path for Swagger UI
+  show-actuator: true  # Show actuator endpoints in Swagger UI
+#<><><><><><><><><><><><><><> MENSAJES DEL SERVICIO <><><><><><><><><><><><><><>
+messages:
+  user:
+    solicitud-nula-vacia: 'Datos de solicitud vacios o nulos'
+    login-vacio-nulo: 'Alias de usuario vacio o nulo'
+    clave-vacia-nula: 'Clave de usuario vacia o nula'
+    usuario-creado: 'Usuario creado satisfactoriamente'
+    usuario-existe: 'El alias ingresado ya existe'
+    usuario-invalido: 'El alias ingresado no cumple los valores permitidos'
+    clave-no-permitida: 'La clave ingresada no cumple con los valores requeridos'
+    correo-no-valido: 'El correo ingresado no es valido'
+    correo-existe: 'El correo ingresado ya existe'
+    correo-vacio: 'El correo es vacio o nulo'
+    solicitud-exitosa: 'Solicitud realizada con exito'
+    sin-datos: 'No existe datos de usuarios'
+  service:
+    general:
+      ok: 'OK'
+      nok: 'No Encontrado'
+      not-authorized: 'No Autorizado'
+      error: 'Error interno de servidor'
