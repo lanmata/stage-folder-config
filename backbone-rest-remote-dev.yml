@@ -134,7 +134,7 @@ eureka:
     restclient:
       enabled: false
     application:
-      name: ${app.name}  # Name of the Eureka client application
+      name: ${umdc.app.name}  # Name of the Eureka client application
     enabled: on  # Enable Eureka client
     tls:
       trust-store-type: ${SSL_JKS_SRMN_TRUSTSTORE_TYPE}  # Trust store type for TLS
