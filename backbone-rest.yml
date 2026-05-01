@@ -1,5 +1,7 @@
 # Configuration for PRX authentication and security settings
-prx:
+umdc:
+    management:
+        clientRoles: ${APP_CLIENT_ROLES:ADMIN,USER}  # Client roles for management
     auth:
         converter:
             resource-id: ${AUTH_CLIENT_ID}  # Resource ID for the authentication client
@@ -8,7 +10,6 @@ prx:
         trace:
             enabled: ${LOGGING_TRACE_ENABLE} # Enable trace logging
 # Application-specific settings
-app:
     api:
         endpoint: /backbone-rest/api/v1  # API endpoint for the application
     environments:
@@ -24,7 +25,7 @@ server:
 # Spring framework configuration
 spring:
     application:
-        name: ${app.name}
+        name: ${umdc.app.name}
         description: Servicio de integracion
     main:
         allow-bean-definition-overriding: true
@@ -109,7 +110,7 @@ spring:
 eureka:
     client:
         application:
-            name: ${app.name}  # Name of the Eureka client application
+            name: ${umdc.app.name}  # Name of the Eureka client application
         enabled: on  # Enable Eureka client
         tls:
             trust-store-type: ${SSL_JKS_SRMN_TRUSTSTORE_TYPE}  # Trust store type for TLS
@@ -135,7 +136,7 @@ eureka:
 
 # Open API documentation configuration
 springdoc:
-    version: ${app.version}  # Version of the Open API documentation
+    version: ${umdc.app.version}  # Version of the Open API documentation
     api-docs:
         version: openapi_3_1  # Version of the Open API specification
     swagger-ui:
