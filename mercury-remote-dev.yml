@@ -20,23 +20,23 @@ prx:
     application-id: ${APPLICATION_ID}  # Initial application ID for the directory
   security:
     keystore:
-      location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore
-      type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the keystore
-      password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the keystore
+      location: ${SSL_KEYSTORE_LOCATION}  # Location of the keystore
+      type: ${SSL_KEYSTORE_TYPE}  # Type of the keystore
+      password: ${SSL_KEYSTORE_PASSWORD}  # Password for the keystore
     truststore:
-      location: ${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
-      type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}  # Type of the truststore
-      password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}  # Password for the truststore
+      location: ${SSL_TRUSTSTORE_LOCATION}  # Location of the truststore
+      type: ${SSL_TRUSTSTORE_TYPE}  # Type of the truststore
+      password: ${SSL_TRUSTSTORE_PASSWORD}  # Password for the truststore
     management-authenticator:
       enabled: true  # Enable management authenticator
       keystore:
-        location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the keystore for management
-        type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the keystore for management
-        password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the keystore for management
+        location: ${SSL_KEYSTORE_LOCATION}  # Location of the keystore for management
+        type: ${SSL_KEYSTORE_TYPE}  # Type of the keystore for management
+        password: ${SSL_KEYSTORE_PASSWORD}  # Password for the keystore for management
       truststore:
-        location: ${SSL_JKS_CNFS_KEYSTORE_LOCATION}  # Location of the truststore for management
-        type: ${SSL_JKS_CNFS_KEYSTORE_TYPE}  # Type of the truststore for management
-        password: ${SSL_JKS_CNFS_KEYSTORE_PASSWORD}  # Password for the truststore for management
+        location: ${SSL_KEYSTORE_LOCATION}  # Location of the truststore for management
+        type: ${SSL_KEYSTORE_TYPE}  # Type of the truststore for management
+        password: ${SSL_KEYSTORE_PASSWORD}  # Password for the truststore for management
 
 # Application-specific settings
 app:
@@ -147,9 +147,9 @@ spring:
             password: ${SSL_KEYSTORE_PASSWORD}  # Password for the keystore
             type: ${SSL_KEYSTORE_TYPE}  # Type of the keystore
           trust-store:
-            location: classpath:${SSL_JKS_CNFS_TRUSTSTORE_LOCATION}  # Location of the truststore
-            password: ${SSL_JKS_CNFS_TRUSTSTORE_PASSWORD}  # Password for the truststore
-            type: ${SSL_JKS_CNFS_TRUSTSTORE_TYPE}  # Type of the truststore
+            location: classpath:${SSL_TRUSTSTORE_LOCATION}  # Location of the truststore
+            password: ${SSL_TRUSTSTORE_PASSWORD}  # Password for the truststore
+            type: ${SSL_TRUSTSTORE_TYPE}  # Type of the truststore
 
 # Cloud configuration
 cloud:
@@ -185,13 +185,13 @@ eureka:
       name: ${app.name}  # Name of the Eureka client application
     enabled: on  # Enable Eureka client
     tls:
-      trust-store-type: ${SSL_JKS_SRMN_TRUSTSTORE_TYPE}  # Trust store type for TLS
-      trust-store-password: ${SSL_JKS_SRMN_TRUSTSTORE_PASSWORD}  # Trust store password for TLS
-      trust-store: classpath:${SSL_JKS_SRMN_TRUSTSTORE_LOCATION}  # Trust store location for TLS
-      key-store-type: ${SSL_JKS_SRMN_KEYSTORE_TYPE}  # Key store type for TLS
-      key-store-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}  # Key store password for TLS
-      key-store: classpath:${SSL_JKS_SRMN_KEYSTORE_LOCATION}  # Key store location for TLS
-      key-password: ${SSL_JKS_SRMN_KEYSTORE_PASSWORD}  # Key password for TLS
+      trust-store-type: ${SSL_TRUSTSTORE_TYPE}  # Trust store type for TLS
+      trust-store-password: ${SSL_TRUSTSTORE_PASSWORD}  # Trust store password for TLS
+      trust-store: classpath:${SSL_TRUSTSTORE_LOCATION}  # Trust store location for TLS
+      key-store-type: ${SSL_KEYSTORE_TYPE}  # Key store type for TLS
+      key-store-password: ${SSL_KEYSTORE_PASSWORD}  # Key store password for TLS
+      key-store: classpath:${SSL_KEYSTORE_LOCATION}  # Key store location for TLS
+      key-password: ${SSL_KEYSTORE_PASSWORD}  # Key password for TLS
     eurekaServerPort: ${SRMN_PORT}  # Port for the Eureka server
     eurekaServerDNSName: ${SRMN_URI}  # DNS name for the Eureka server
     fetch-registry: true  # Enable fetching the registry from Eureka
