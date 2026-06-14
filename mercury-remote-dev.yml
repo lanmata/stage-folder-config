@@ -1,5 +1,5 @@
 # Configuration for PRX authentication and security settings
-prx:
+umdc:
   verification:
     code:
       template:
